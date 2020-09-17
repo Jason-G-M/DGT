@@ -8,14 +8,11 @@ The main functionalities of the tool contain:
 - Management 
 1. View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
 2. Track the progress of adapting incompatible assemblies to compatible ones.
-
 - Analysis
 1. Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths from one assembly to another.)
-
 - Monitoring
 1. Monitor the trend of changes in dependencies. 
 2. Detect the changes in the dependencies of assemblies and the dependency tree.
-
 
 ### Architecture
 
@@ -35,6 +32,6 @@ DGT service consists of four processes and is supported by two databases.
 
 #### Databases
 - SQL DB
-Store configuration
+1. Store configuration
 - Neo4j
-Store graph data
+1. Store graph data
