@@ -35,3 +35,54 @@ DGT service consists of four processes and is supported by two databases.
 1. Store configuration
 - Neo4j
 1. Store graph data
+
+
+## Startup
+### Neo4j
+#### Neo4j installation
+#### Neo4jConfiguration
+
+### SQL Server
+### JRE
+### NetCore 3.1
+### Node.js
+### npm
+### API Port
+
+## DGT configuration
+### Folder configuration
+### Script configuration
+### UI configuration
+### Recurring job configuration
+
+
+## Deployment
+### Assembly package demo
+### Start with a script
+
+## Operation Manual
+### Dashboard
+### Tools
+#### Process's Root Parents
+#### Process to Assembly Path
+#### Assembly to Assembly Path
+#### Process's Assemblies
+#### Assembly Details
+#### Difference
+#### New Assembly Check
+#### Assembly Children Paths
+
+### Type Analysis
+#### Process's Types
+#### One Shortest Path Process to Type
+#### One Shortest Path From Assembly to Type
+#### Multi-Path Process to Type
+#### Multi-Path Assembly to Type
+
+
+### System
+#### Process Config
+#### Repo Config
+#### Import Status
+#### Error Log
+
