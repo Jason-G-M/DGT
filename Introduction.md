@@ -74,7 +74,7 @@ bin\neo4j console
 4. Connect Neo4j.
 ##### Neo4j Host
 Neo4j Host can be found after logging in, for example, the Neo4j Host in the figure below is bolt://127.0.0.1:7687.
-![Neo4j dashboard and Neo4j Host](image.png)
+![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png)
 
 ### SQL Server
 ### JRE
