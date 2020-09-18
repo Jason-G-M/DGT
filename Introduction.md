@@ -77,6 +77,31 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 ![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png)
 
 ### SQL Server
+#### SQL Server Installation
+- Either SQL Server or SQL Server Express is recommended to install.
+1. [Click here to download SQL Server.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+2. [Click here to download SQL Server Express.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- Use SQL Server Management Studio (SSMS) to manage SQL Server conveniently.
+1. [Click here to download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+#### SQL Server Configuration
+##### Authentication
+1. Open SSMS -> choose Windows Authentication type -> click Connect.
+2. Right-click your server -> choose Properties -> Click Security in the left of the window -> Set Server authentication as SQL Server and Windows Authentication mode.
+3. Restart your computer.
+##### Connection string
+- SQL Server IP:  Server Address. For example, 127.0.0.1 is the IP for the local SQL Server.
+- User ID & Password: Create an account to start the server.
+1. New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
+2. Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
+![CreateLogin]()
+![SetUserIdAndPassword]()
+![UserIdAndPassword]()
+
+- Name of your database: Create a new database and record the name of it.
+1. Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
+![CreateANewDatabase]()
+![SetNameOFTheDatabaseAndClickOk]()
+
 ### JRE
 ### NetCore 3.1
 ### Node.js
