@@ -48,23 +48,23 @@ Visit the official website and download [Windows Neo4j Community Edition 3.5.21]
 ###### Run as a Windows Service
 Open Command Prompt and direct into Neo4j 3.5.21 file path.
 1. Install service, use:
-```markdown
+```cmd
 bin\neo4j install-service
 ```
 2. Change memory configuration, use: (Note: Set heap.max_size according to your device's memory.)
-```markdown
+```cmd
 echo dbms.memory.heap.initial_size=8g >> conf\neo4j.conf
 echo dbms.memory.heap.max_size=16g >> conf\neo4j.conf
 ```
 
 3. Start service, use:
-```markdown
+```cmd
 bin\neo4j start
 ```
 ###### Run as a Console Application
 Try this method if Neo4j cannot start as a windows service.
 Run Neo4j as a console application, use:
-```markdown
+```cmd
 bin\neo4j console
 ```
 ##### Set Neo4j Username and Password
@@ -93,20 +93,35 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 - User ID & Password: Create an account to start the server.
 1. New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
 2. Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
-![CreateLogin]()
-![SetUserIdAndPassword]()
-![UserIdAndPassword]()
+![CreateLogin](image/CreateLogin.png)
+![SetUserIdAndPassword](image/SetUserIdAndPassword.png)
+![UserIdAndPassword](image/UserIdAndPassword.png)
 
 - Name of your database: Create a new database and record the name of it.
 1. Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
-![CreateANewDatabase]()
-![SetNameOFTheDatabaseAndClickOk]()
+![CreateANewDatabase](image/CreateANewDatabase.png)
+![SetNameOFTheDatabaseAndClickOk](image/SetNameOFTheDatabaseAndClickOk.png)
 
 ### JRE
+Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox) (only version 8u231 is supported) and install it on your local environment, [more information](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
+
 ### NetCore 3.1
+The Dependency Graph Tool is based on .Net Core 3.1, download from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) if it is not in your local environment, [more Information](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.7/3.1.7.md).
+
 ### Node.js
+Download the latest [Node.js](https://nodejs.org/en/download/), run the script below in command prompt to install. Once the installation succeeded, the command prompt will dispaly the version installed, [more information](https://nodejs.org/en/docs/).
+```cmd
+node -v
+```
 ### npm
+The front-end process of the Dependency Graph Tool (DGT) depends on three npm packages (react-scripts, monaco-editor and cross-env), which will be automatically installed by the commands below triggered by the script OneKeyDeploy.ps1, users do not have to do anything, [more information](https://docs.npmjs.com/).
+```cmd
+npm i react-scripts
+npm i monaco-editor
+npm i cross-env
+```
 ### API Port
+Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action required, [more information](https://github.com/microsoft/dotnet-apiport).
 
 ## DGT configuration
 ### Folder configuration
