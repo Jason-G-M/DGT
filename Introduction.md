@@ -1,49 +1,47 @@
-## Introduction
-
-### Dependency Graph Tool
+# 1. Introduction
 Dependency Graph Tool (DGT) is designed to analyze and display the overall information of APIs' compatibility for .Net Core of different processes/builds in Substrate assemblies.
 
 The main functionalities of the tool contain:
 - Management 
-1. View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
-2. Track the progress of adapting incompatible assemblies to compatible ones.
+  - View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
+  - Track the progress of adapting incompatible assemblies to compatible ones.
 - Analysis
-1. Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths from one assembly to another.)
+  - Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths from one assembly to another.)
 - Monitoring
-1. Monitor the trend of changes in dependencies. 
-2. Detect the changes in the dependencies of assemblies and the dependency tree.
+  - Monitor the trend of changes in dependencies. 
+  - Detect the changes in the dependencies of assemblies and the dependency tree.
 
-### Architecture
+## Architecture
 DGT service consists of four processes and is supported by two databases.
 
-#### Processes
+### Processes
 - Scan Tool
-1. Scan assemblies' information.
--Build Graph Tool
-1. Build dependency graphs and import them to the Neo4j database.
-2. Analyze relationships between assemblies.
+  - Scan assemblies' information.
+- Build Graph Tool
+  - Build dependency graphs and import them to the Neo4j database.
+  - Analyze relationships between assemblies.
 - Web API
-1. Querry data from databases.
-2. Delivery data to the front end.
+  - Querry data from databases.
+  - Delivery data to the front end.
 - Front End
-1. Present data.
+  - Present data.
 
-#### Databases
+### Databases
 - SQL DB
-1. Store configuration
+  - Store configuration
 - Neo4j
-1. Store graph data
+  - Store graph data
 
 
-## Startup
+# 2. Startup
 The Dependency Graph Tool (DGT) depends on SQL Server, Neo4j, JRE, .Net Core 3.1, Node.js, npm packages, and API Port. Please finish the installation and configuration before starting the DGT.
 
-### Neo4j
+## 2.1 Neo4j
 
-#### Neo4j Installation
+### 2.1.1 Neo4j Installation
 Visit the official website and download [Windows Neo4j Community Edition 3.5.21](https://neo4j.com/download-thanks/?edition=community&release=3.5.21&flavour=winzip&_ga=2.176909797.114973728.1598256184-1237716368.1595239954&_gac=1.195112414.1595902492.CjwKCAjw9vn4BRBaEiwAh0muDCf_xYI1PeoiFtSlHOCWO_yWQkg7QwJMjmjo0Rm-wYihI7v0nc2QMhoCSBMQAvD_BwE).
 
-#### Neo4j Configuration
+### 2.1.2 Neo4j Configuration
 ##### Run Neo4j
 ###### Run as a Windows Service
 Open Command Prompt and direct into Neo4j 3.5.21 file path.
@@ -76,14 +74,14 @@ bin\neo4j console
 Neo4j Host can be found after logging in, for example, the Neo4j Host in the figure below is bolt://127.0.0.1:7687.
 ![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png)
 
-### SQL Server
-#### SQL Server Installation
+## 2.2 SQL Server
+### 2.2.1 SQL Server Installation
 - Either SQL Server or SQL Server Express is recommended to install.
-1. [Click here to download SQL Server.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-2. [Click here to download SQL Server Express.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+  - [Click here to download SQL Server.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+  - [Click here to download SQL Server Express.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - Use SQL Server Management Studio (SSMS) to manage SQL Server conveniently.
-1. [Click here to download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
-#### SQL Server Configuration
+  - [Click here to download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+### 2.2.2 SQL Server Configuration
 ##### Authentication
 1. Open SSMS -> choose Windows Authentication type -> click Connect.
 2. Right-click your server -> choose Properties -> Click Security in the left of the window -> Set Server authentication as SQL Server and Windows Authentication mode.
@@ -91,24 +89,37 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 ##### Connection string
 - SQL Server IP:  Server Address. For example, 127.0.0.1 is the IP for the local SQL Server.
 - User ID & Password: Create an account to start the server.
-1. New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
-2. Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
+  - New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
+  - Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
 ![CreateLogin](image/CreateLogin.png)
+**Create login**
 ![SetUserIdAndPassword](image/SetUserIdAndPassword.png)
+**Set User ID and Password**
 ![UserIdAndPassword](image/UserIdAndPassword.png)
+**User ID and password**
 
 - Name of your database: Create a new database and record the name of it.
-1. Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
+  - Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
 ![CreateANewDatabase](image/CreateANewDatabase.png)
+**Create a new database**
 ![SetNameOFTheDatabaseAndClickOk](image/SetNameOFTheDatabaseAndClickOk.png)
+**Set name of the database and click OK**
+#### Note
+- If you cannot create a new database in your personal SQL server account, please create it in sa account. Then, check if your personal account owns this database.
+- Please log in SQL Server with your Login and Password, and make sure you are allowed to add and edit tables in your database. If you find that your account does not have such permission, please check whether your account is the db_owner of your database.
+  - Open the server -> Security -> Login -> Right-click sa account -> Choose propertites -> Set new password -> Click Status in the left of the window -> Set Login Enable -> Click OK.
+  - Open the server -> Connect Server with sa account and your sa's password -> Security -> Login -> Right-click your personal account -> Choose propertites -> Choose User Mapping in the left of the window -> Add your database to your Login -> add db_owner -> Click OK.
+![add DB](image/AddDb.png)
+**Add db_owner to your database**
 
-### JRE
+- Please remember your SQL Server IP, name of the database, Login Username, and Password, these will be used in further steps.
+## 2.3 JRE
 Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox) (only version 8u231 is supported) and install it on your local environment, [more information](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
 
-### NetCore 3.1
+## 2.4 NetCore 3.1
 The Dependency Graph Tool is based on .Net Core 3.1, download from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) if it is not in your local environment, [more Information](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.7/3.1.7.md).
 
-### Node.js
+## 2.5 Node.js
 Download the latest [Node.js](https://nodejs.org/en/download/), run the script below in command prompt to install. Once the installation succeeded, the command prompt will dispaly the version installed, [more information](https://nodejs.org/en/docs/).
 ```cmd
 node -v
@@ -120,11 +131,11 @@ npm i react-scripts
 npm i monaco-editor
 npm i cross-env
 ```
-### API Port
+## 2.7 API Port
 Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action required, [more information](https://github.com/microsoft/dotnet-apiport).
 
-## 3. DGT configuration
-### 3.1 Folder configuration
+# 3. DGT configuration
+## 3.1 Folder configuration
 Before running the script OneKeyDeploy.ps1, it is necessary to define file paths and the version for the Dependency Graph Tool (DGT). It determines which files will be scanned by DGT.
 
 The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/deploy/demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
@@ -165,15 +176,15 @@ Users are allowed to customize the configuration by following the steps below.
 5. Create a cache folder.
 
 #### Note 
->* Users are allowed to add files to be scanned in the assembly folder and define the corresponding version in the version.txt, but do not change the ConfigFolder structure when running the script for the first time. 
->* After running the service successfully, users can modify the folder configuration (must be matched with the customized folder configuration) in the Repo Config page.
->* Users are recommended to keep the default path parameters (Version File Path, Assembly Folder Path, and Cache Folder Path). Files to be scanned can be moved to the assembly folder in the default Assembly Folder Path, instead of creating a new assembly folder.
+- Users are allowed to add files to be scanned in the assembly folder and define the corresponding version in the version.txt, but do not change the ConfigFolder structure when running the script for the first time. 
+- After running the service successfully, users can modify the folder configuration (must be matched with the customized folder configuration) in the Repo Config page.
+- Users are recommended to keep the default path parameters (Version File Path, Assembly Folder Path, and Cache Folder Path). Files to be scanned can be moved to the assembly folder in the default Assembly Folder Path, instead of creating a new assembly folder.
 
-### 3.2 Script configuration
+## 3.2 Script configuration
 #### Listening Ports
->* The script will start four processes which require four different listening ports. 
->* http://localhost:8000 to 8003 are used to set the default listening ports.
->* Users are allowed to customize listening ports in the script.
+- The script will start four processes which require four different listening ports. 
+- http://localhost:8000 to 8003 are used to set the default listening ports.
+- Users are allowed to customize listening ports in the script.
 
 ![Customized listening ports](image/CustomizedListeningPorts.png)
 **Customized Listening Ports**
@@ -187,25 +198,25 @@ Enter the Neo4j and SQL Server configuration in the script (using parameters fro
 Name of the repo, the default name is DefaultRepo, open to be modified when running the script.
 ![Repo Name](image/RepoName.png)
 
-### 3.3 UI configuration
-#### 3.3.1 Process Config
->* Process Name: Give a name to the current process.
->* Start Assemblies: Add or delete start assemblies for the current process.
+## 3.3 UI configuration
+### 3.3.1 Process Config
+- Process Name: Give a name to the current process.
+- Start Assemblies: Add or delete start assemblies for the current process.
 
 [More information](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/operation-manual/system/process-config)
 
-#### 3.3.2 Repo Config
->* .NET Core Exts: .NET Core Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
->* .NET Standard Exts: .NET Standard Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
-  >* .Net Core Exts and .Net Standard Exts determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number 0 is going to disable the check. 
-  >* Compatible means an API can work in a new environment. When setting configurations, you are allowed to set X2 and Y2 shown in the figure below.
+### 3.3.2 Repo Config
+- .NET Core Exts: .NET Core Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
+- .NET Standard Exts: .NET Standard Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
+  - .Net Core Exts and .Net Standard Exts determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number 0 is going to disable the check. 
+  - Compatible means an API can work in a new environment. When setting configurations, you are allowed to set X2 and Y2 shown in the figure below.
 ![The Condition Of Api Is Compatible In A New Environment](image/TheConditionOfApiIsCompatibleInANewEnvironment.png)
 **The condition of Api is compatible in a new environment**
->* Repo: Name of the repo.
->* Assembly Folder Path
->* Cache Folder Path
->* ApiPort Path
->* Version File Path
+- Repo: Name of the repo.
+- Assembly Folder Path
+- Cache Folder Path
+- ApiPort Path
+- Version File Path
 
 ##### Default Configuration
 Users are allowed to modify the default configuration.
@@ -213,7 +224,7 @@ Users are allowed to modify the default configuration.
 **Default Configuration**
 [More Information](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/operation-manual/system/repo-config)
 
-### 3.4 Recurring job configuration
+## 3.4 Recurring job configuration
 In the default configuration, the recurring job function is disabled, meaning the DGT can only scan files once, then analyze and indicate results. If the DGT is required to implement the recurring job (scan files multiple times in a specific time interval).
 
 #### Configuration
@@ -225,12 +236,12 @@ Follow the steps below to set the  "CrontabString".
 3. Set a version in the version.txt, which determines the next folder to be scanned.
 
 #### Note
->* When setting the value of "CrontabString" in the appsettings.json, please do not modify other values.
->* If the recurring job function is enabled, please do not close any running process of the DGT.
+- When setting the value of "CrontabString" in the appsettings.json, please do not modify other values.
+- If the recurring job function is enabled, please do not close any running process of the DGT.
 
-## 4. Deployment
+# 4. Deployment
 
-### 4.1 Assembly package demo
+## 4.1 Assembly package demo
 #### Demo files
 The assembly package demo consists of two folders, each folder corresponds to a version, 1.0.0.0 and 1.0.0.1, they are prepared for the Dependency Graph Tool (DGT) to scan, analyze, and draw the graph. The structures of the files in each folder are shown below.
 
@@ -246,28 +257,28 @@ Folder 1.0.0.0 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Granddaughter.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
 
 #### Note 
->* 1.0.0.0 and 1.0.0.1 are [assembly file versions](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning), which means in Folder 1.0.0.0, all the assembly file versions of the repo are 1.0.0.0. The rule also adapts to Folder 1.0.0.1.
->* In the figures of the files structures, system assemblies have been hidden.
->* The dependency relation between every two nodes is similar to that of the ethical relation. For example, Root.dll node depends on Son.dll and Daughter.dll nodes. Son.dll node depends on Grandson.dll and Nuget.Common.dll nodes.
->* In most cases, all the assembly file versions of a repo are the same, which can help to differentiate whether the current repo is NuGet or not.
->* Generally, the assembly file version is the same as the [build version](https://searchsoftwarequality.techtarget.com/definition/build). Get [more information](https://docs.microsoft.com/en-us/dotnet/standard/assembly/set-attributes) here if user demands to change the assembly file version.
+- 1.0.0.0 and 1.0.0.1 are [assembly file versions](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning), which means in Folder 1.0.0.0, all the assembly file versions of the repo are 1.0.0.0. The rule also adapts to Folder 1.0.0.1.
+- In the figures of the files structures, system assemblies have been hidden.
+- The dependency relation between every two nodes is similar to that of the ethical relation. For example, Root.dll node depends on Son.dll and Daughter.dll nodes. Son.dll node depends on Grandson.dll and Nuget.Common.dll nodes.
+- In most cases, all the assembly file versions of a repo are the same, which can help to differentiate whether the current repo is NuGet or not.
+- Generally, the assembly file version is the same as the [build version](https://searchsoftwarequality.techtarget.com/definition/build). Get [more information](https://docs.microsoft.com/en-us/dotnet/standard/assembly/set-attributes) here if user demands to change the assembly file version.
 ![Root.dll](image/Root.dll.png)
 **The assembly file version is the same as the build version (product version).**
 
-### 4.2 Start with a script
-DGT is supported by Windows OS. Before running DGT, make sure PowerShell as been installed. Right-click OneKeyDeploy.ps1, then click Run with PowerShell.
+## 4.2 Start with a script
+DGT is supported by Windows OS. Before running DGT, make sure [PowerShell](https://docs.microsoft.com/en-us/powershell/) as been installed. Right-click OneKeyDeploy.ps1, then click Run with PowerShell.
 
 #### Procedure
 The script OneKeyDeploy.ps1 will help you conveniently start the Dependency Graph Tool (DGT). The basic procedure of it is listed below:
->* Set a version in version.txt.
->* Set listening ports for four processes.
->* Configure with [SQL Server]() and [Neo4j]().
->* Choose to run a demo mode or run the DGT based on the customized settings.
-```powershell
+- Set a version in version.txt.
+- Set listening ports for four processes.
+- Configure with [SQL Server](#2.2.2-SQL-Server-Configuration) and [Neo4j](#2.1.2-Neo4j-configuration).
+- Choose to run a demo mode or run the DGT based on the customized settings.
+```Power Shell
 Do you want to have a quick start with a demo (pre-prepared asembly files will be scanned and analyzed)? 'Enter' key means 'Y'. (Y/N)
 ```
->* Start four processes.
->* Monitor four processes.
+- Start four processes.
+- Monitor four processes.
 ![Start and monitor 4 processes](image/StartAndMonitor4Processes.png)
 **Start and monitor 4 processes**
 
@@ -278,54 +289,343 @@ The decision tree indicates the main decisions made in the script and the corres
 
 #### Scan and analyze your files
 Customize settings.
->* Activate the recurring job or not.
->* Create a new folder with a name same as your repo's assembly file version in Assembly Folder.
->* Add files to be scanned into the new folder.
->* Set the content of the version.txt corresponding to the version of the assembly files.
->* Run the script.
->* Set listening ports for four processes in the script.
->* Set or keep SQL Server and Neo4j configurations in the script.
->* Initialize tables in SQL Server or not in the script.
->* Customize a repo name in the script.
->* Service starts.
->* Edit configuration in the  Repo Config page in UI.
->* Add a new process in the Process Config page in UI.
+- Activate the recurring job or not.
+- Create a new folder with a name same as your repo's assembly file version in Assembly Folder.
+- Add files to be scanned into the new folder.
+- Set the content of the version.txt corresponding to the version of the assembly files.
+- Run the script.
+- Set listening ports for four processes in the script.
+- Set or keep SQL Server and Neo4j configurations in the script.
+- Initialize tables in SQL Server or not in the script.
+- Customize a repo name in the script.
+- Service starts.
+- Edit configuration in the  Repo Config page in UI.
+- Add a new process in the Process Config page in UI.
 
 #### Note
 Use default settings and demo to have a quick start.
->* Run the script.
->* Use the default listening ports in the script.
->* Enter SQL Server and Neo4j configurations in the script.
->* Choose the demo mode.
->* Service starts.
+- Run the script.
+- Use the default listening ports in the script.
+- Enter SQL Server and Neo4j configurations in the script.
+- Choose the demo mode.
+- Service starts.
 
 Users are allowed to reset tables in SQL Server.
 ![Reset tables](image/ResetTables.png)
 **Reset tables**
 
-## 5. Operation Manual
-### Dashboard
-### Tools
-#### Process's Root Parents
-#### Process to Assembly Path
-#### Assembly to Assembly Path
-#### Process's Assemblies
-#### Assembly Details
-#### Difference
-#### New Assembly Check
-#### Assembly Children Paths
+# 5. Operation Manual
+## 5.1 Dashboard
+This page is designed to display overall information of compatible and incompatible APIs of different processes in different builds. The data of this page is from analyzing the demo we have prepared.
 
-### Type Analysis
-#### Process's Types
-#### One Shortest Path Process to Type
-#### One Shortest Path From Assembly to Type
-#### Multi-Path Process to Type
-#### Multi-Path Assembly to Type
+#### Charts
+The dashboard contains four charts.
+- [Pie charts of version's status](#Pie-charts-of-version's-status), showing the number of compatible and incompatible APIs.
+- [Trend over builds](#Trend-over-builds), showing the version status change over time.
+- [Overlaps per build](#Overlaps-per-build), showing the impact on other processes.
+- [All processes per build](#All-processes-per-build), showing the overall situation for all onboard processes.
 
+![dashboard overview](image/DashboardOverview.png)
+**Dashboard overview**
 
-### System
-#### Process Config
-#### Repo Config
-#### Import Status
-#### Error Log
+#### Pie charts of version's status
+![Proportion](image/Proportion.png)
+**Proportion of compatibles and incompatibles**
 
+- Total: Sum of the compatible and incompatible APIs from DefaultRepo and Nuget. For example, in the figure above, the number of compatible APIs in Total, 14, comes from 4 compatible APIs in DefaultRepo and 10 Compatible APIs from Nuget; and the number of Incompatible APIs in Total, 0, comes from 0 Incompatible APIs in - DefaultRepo and 0 Incompatible APIs from Nuget.
+DefaultRepo: The content of the DefaultRepo pie chart comes from your repo (or your project). For example, in Demo 1.0.0.0 shown below, Root.dll, Son.dll, Daughter.dll, and GrandSon.dll are created by yourself (you define them) in your repo (or project), so the DefaultRepo pie chart is made up by these four files (nodes). Since APIs of them are all compatible, the pie chart shows that Compatible is 4 and Incompatible is 0.
+![Demo 1.0.0.0](image/Demo1.0.0.0.png)
+**Demo 1.0.0.0**
+- Nuget: NuGet is the package manager for .NET. The pie chart shows the number of compatible and incompatible APIs coming from NuGet.  For the demo case, Demo 1.0.0.0 uses 10 APIs from NuGet, so in the pie chart, the compatible is 10 and the incompatible is 0.
+- Package: It shows the number of compatible and incompatible assemblies in all NuGet packages. The information in this chart is set manually. The default info shows that all the APIs are incompatible, while users can mark any NuGet assemblies compatible. The total number of APIs in the Package pie chart is the same as those in the NuGet pie chart. Visit [Assembly Detail](#5.2.5-Assembly-Details) for more information. 
+#### Trend over builds
+![TrendOverBuilds](image/TrendOverBuilds.png)
+**Number of compatibles and incompatibles of each build**
+
+#### Overlaps per build
+![Overlaps Per Build](image/OverlapsPerBuild.png)
+** Overlaps and differences between current build and others**
+
+#### All processes per build
+![All processes](image/AllProcessesPerBuild.png)
+**Number of compatibles and incompatibles of each process in the current build.**
+
+#### Note
+- The results shown on this page are from Demo 1.0.0.0.
+- Make sure you match the version and process name. The version is the file version of your repo, and the process name can be found in the Process Config page.  
+![version and process](image/VersionAndProcess.png)
+**Version and process**
+
+## 5.2 Tools
+### 5.2.1 Process's Root Parents
+
+#### Usage
+View the name of assemblies directly referred by a process.#### 5.2.2 Process to Assembly Path
+#### Instruction
+1. Select the Version and Process.
+2. View results. 
+3. Get Results.
+
+![overview](image/Process'sRootParentOverview.png)
+**Process's Root Parent Overview**
+
+### 5.2.2 Process to Assembly Path
+#### Usage
+- Find out paths from a process to an assembly.
+- Estimate the quantity of work related to "De-referring".
+- Check the node for work related to "Separating".
+
+#### Instruction
+1. Select Version, Process,  and Target Assembly. 
+2. Select Skip Assembly. This will filter some results since the paths that contain the Skip Assembly you choose will be filtered.
+4. Uncheck All paths and fill path number with a specific number to customize the number of results to display (up to 500, optional). Or check All paths to see all the results.
+4. Click on the X button in the skips list to remove the assembly from the list (optional). 
+5. Get Results.
+![Process to assembly](image/ProcessToAssembly.png)
+**Multiple paths start from process to target assembly Overview**
+
+### 5.2.3 Assembly to Assembly Path
+#### Usage
+- Find out paths from one assembly to another.
+- Estimate the quantity of work related to "De-referring".
+- Check the node for work related to "Separating".
+
+#### Instruction
+1. Select Version, Process, and Target Assembly.
+2. Select Skip Assembly. This will filter some results since the paths that contain the Skip Assembly you choose will be filtered.
+3. Uncheck All paths and fill path number with s specific number to customize the number of results to display (up to 500, optional). Or check "All paths" to see all the results.
+4. Click on the X button in the skips list to remove the assembly from the list (optional). 
+5. Get Results.
+
+![Assembly to assembly](image/Assembly2AssemblyOverview.png)
+**Assembly to assembly overview**
+
+### 5.2.4 Process's Assemblies
+#### Usage
+- View data of a process in a specific build version.
+- Export data of a process.
+- Find out assemblies in special conditions (contains incompatible APIs or circular reference).
+#### Instruction
+Select the Version and Process. 
+Filter data with assembly name or other conditions. 
+Click on the assembly in results to view its details (optional). 
+Click on Export Total to export the results as excel (optional). 
+Get Results.
+![Process'sAsssembliesOverview](image/Process'sAsssembliesOverview.png)
+**Process's asssemblies overview**
+
+### 5.2.5 Assembly Details
+#### Usage
+- Add APIs to the filter list for those ported by the preprocessor. 
+- Find out the path of an assembly. 
+- Find out the package link of a NuGet assembly. 
+- Find out assemblies referring to the selected assembly in the selected process. 
+- Check updates for selected assembly.
+- Set the compatibility of assemblies.
+#### Instruction
+See details of an assembly
+1. Select the Version and Assembly to get detailed information. 
+2. Select the process to filter data. 
+3. Get Results.
+![AssemblyDetailsOverview](image/AssemblyDetailsOverview.png)
+**Assembly details overview**
+
+![Assembly details overview](image/AssemblyDetailsOverview.png)
+**Assembly details overview**
+
+##### Set the compatibility of assemblies in the Package pie chart
+1. Set the version and choose an assembly.
+2. Click the Create button.
+3. Set HasNetCoreVersion to True.
+4. Click Add Package Info (only enable when HasNetCoreVersion is True).
+5. Input package information.
+6. Get Results.
+![SetCompatibilityOfAssemblies](image/SetCompatibilityOfAssemblies.png)
+**Set the compatibility of assemblies in Package pie chart**
+If you set the compatibility successfully, the Create button will be changed to Update and you will see the figure below.
+![SetCompatibilitySuccessfully](image/SetCompatibilitySuccessfully.png)
+**Set compatibility successfully**
+
+### 5.2.6 Difference
+#### Usage
+- Monitor the change of the number of incompatible APIs of processes/assemblies.
+- Arrange and track the work related to "Porting" and "Separation".
+#### Instruction
+- Select the Process or Assembly tab. 
+- Select source type (optional). 
+- Select the version and process/assembly name of base-build and aim-build to view results. 
+- Click on the number of differences to view details. 
+- Get Results.
+![DifferenceDetails](image/DifferenceDetails.png)
+**Difference overview**
+
+![GoIntoDetails](image/GoIntoDetails.png)
+**Go into details**
+
+### 5.2.7 New Assembly Check
+#### Usage
+- Check whether the new assembly is safe before adding it to the master.
+#### Instruction
+- Select Version and Process.
+- Select files, uploading assemblies to find out whether it will affect the .NET Core process.
+- Click "Analyze", and wait for a moment to see results.
+- "Not safe" means the change or addition of assembly will have an impact on the original process, which needs to be analyzed.
+- "Safe" means changing or adding an assembly will not affect the original process.
+- Get Results.
+![Operations](image/Operations.png)
+**Operations**
+![ViewResults](image/ViewResults.png)
+**View results**
+
+### 5.2.8 Assembly Children Paths
+#### Usage
+- Get all paths from the target assembly to its children assemblies, helping to work on "eliminating incompatible APIs" tasks.
+#### Instruction
+- Select Version and Process.
+- Select a target assembly.
+- Select Must Passing Assembly.
+- Choose Path number or All paths checkbox, this will affect the number of results to display.
+- Get Results.
+![AssemblyChildrenPathsOverview](image/AssemblyChildrenPathsOverview.png)
+**Assembly Children Paths Overview**
+## 5.3 Type Analysis
+### 5.3.1 Process's Types
+#### Usage
+- Find out if a process/assembly contains a specific type.
+- Find out the distance between a process/assembly to a type.
+#### Instruction
+1. Select the Process or Assembly tab. 
+2. Select the Version and Process name. 
+3. Add filter according to a specific condition (optional). 
+4. Get Results.
+![Process's Types Overview](image/Process'sTypesOverview.png)
+**Process's types overview**
+
+### 5.3.2 One Shortest Path Process to Type
+#### Usage
+- Find the shortest path from a process to a type, helpful to works related to "Separation".
+
+#### Instruction
+1. Select Version, Source Process, and Target Type.
+2. Get Results.
+![One Shortest Path Process To Type Overview](image/ShortestPathP2T.png)
+**One Shortest Path Process To Type Overview**
+
+### 5.3.3 One Shortest Path From Assembly to 
+#### Usage
+- Find out the shortest path from an assembly to a type, helpful to works related to "Separation".
+#### Instruction
+1. Select Version, Start Assembly, and Target Type.
+2. Get Results.
+![ShortestPathA2T](image/ShortestPathA2T.png)
+**One Shortest Path From Assembly To Type Overview**
+
+### 5.3.4 Multi-Path Process to Type
+#### Usage
+- Find out paths from a process to a type.
+- Check if it is able to dereference the target type from the Source Process through the selected node.
+#### Instruction
+- Select Version, Source Process, and Target Type.
+- Select Skip Types and Skip Assemblies.
+- Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional), or check "All paths" to see all the results.
+- Get Results.
+![PTO](image/PTO.png)
+**Process's Type Overview**
+
+### 5.3.5 Multi-Path Assembly to Type
+#### Usage
+- Find out paths from an assembly to a type. 
+#### Instruction
+1. Select Version, Start Assembly, and Target Type.
+2. Select Skip.
+3. Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional). Or check "All paths" to see all the results.
+4. Get Results.
+![MultiPathA2T](image/MultiPathA2T.png)
+**Multi-Path Assembly To Type Overview**
+
+## 5.4 System
+
+### 5.4.1 Process Config
+#### Usage
+- Add, delete, or edit the name of the process and its start assemblies.
+#### Instruction
+##### Add new
+1. Click Add new.
+2. Enter a process name.
+3. Add Start Assemblies.
+4. Click OK.
+![](image/AddNew.png)
+**Add new operation**
+
+##### Edit
+1. Click Edit.
+2. Edit the process name.
+3. Edit Start Assemblies.
+4. Click OK.
+![Edit](image/Edit.png)
+**Edit operation**
+
+##### Delete
+1. Click Delete.
+2. Click OK.
+![Delete](image/Delete.png)
+**Delete operation**
+
+### 5.4.2 Repo Config
+#### Usage
+- Add, delete, or edit repo [settings](#3.3-UI-configuration).
+#### Instruction
+##### Edit
+1. Click Edit.
+2. Edit settings.
+3. Click OK.
+![RepoConfigEdit](image/RepoConfigEdit.png)
+**Edit operation**
+
+##### Delete
+Click Delete.
+Click OK.
+![RepoConfigDelete](image/RepoConfigDelete.png)
+**Delete operation**
+
+#### Set up
+The Set up button shows up when there is no repo.
+1. Click Set up.
+2. Enter settings.
+3. Click OK.
+![RepoConfigSetup](image/RepoConfigSetup.png) 
+**Set up operation**
+
+### 5.4.3 Import Status
+#### Usage
+- Add, delete, or edit repo import status
+#### Instruction
+##### Add new
+1. Click Add new.
+2. Enter settings.
+3. Click OK.
+![ImportStatusAdd](image/ImportStatusAdd.png)
+**Add new operation**
+
+##### Edit
+1. Click Edit.
+2. Edit settings.
+3. Click OK.
+![ImportStatusEdit](image/ImportStatusEdit.png)
+**Edit operation**
+
+##### Delete
+1. Click Delete.
+2. Click OK.
+![ImportStatusDelete](image/ImportStatusDelete.png)
+**Delete operation**
+
+### 5.4.4 Error Log
+#### Usage
+- Search the cause and impact of data import failure. 
+- Help check out if scanning or rule import is activated.
+#### Instruction
+1. Select a Version.
+2. Get results.
+![error log](image/ErrorLog.png)
+**Error log**
