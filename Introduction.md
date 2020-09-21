@@ -91,28 +91,42 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 - User ID & Password: Create an account to start the server.
   - New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
   - Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
+
 ![CreateLogin](image/CreateLogin.png)
+
 **Create login**
+
 ![SetUserIdAndPassword](image/SetUserIdAndPassword.png)
+
 **Set User ID and Password**
+
 ![UserIdAndPassword](image/UserIdAndPassword.png)
+
 **User ID and password**
 
 - Name of your database: Create a new database and record the name of it.
   - Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
+
 ![CreateANewDatabase](image/CreateANewDatabase.png)
+
 **Create a new database**
-![SetNameOFTheDatabaseAndClickOk](image/SetNameOFTheDatabaseAndClickOk.png)
+
+![SetNameOFTheDatabaseAndClickOk](image/SetNameOfTheDatabaseAndClickOk.png)
+
 **Set name of the database and click OK**
+
 #### Note
 - If you cannot create a new database in your personal SQL server account, please create it in sa account. Then, check if your personal account owns this database.
 - Please log in SQL Server with your Login and Password, and make sure you are allowed to add and edit tables in your database. If you find that your account does not have such permission, please check whether your account is the db_owner of your database.
   - Open the server -> Security -> Login -> Right-click sa account -> Choose propertites -> Set new password -> Click Status in the left of the window -> Set Login Enable -> Click OK.
   - Open the server -> Connect Server with sa account and your sa's password -> Security -> Login -> Right-click your personal account -> Choose propertites -> Choose User Mapping in the left of the window -> Add your database to your Login -> add db_owner -> Click OK.
+
 ![add DB](image/AddDb.png)
+
 **Add db_owner to your database**
 
 - Please remember your SQL Server IP, name of the database, Login Username, and Password, these will be used in further steps.
+
 ## 2.3 JRE
 Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox) (only version 8u231 is supported) and install it on your local environment, [more information](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
 
@@ -141,30 +155,35 @@ Before running the script OneKeyDeploy.ps1, it is necessary to define file paths
 The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/deploy/demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
 
 ![Default Config Folder](image/DefaultConfigFolder.png)
+
 **Default Config Folder**
 
 #### Assembly Folder Path
 The physical path of the folder containing assembly files to be scanned. Under the assembly folder, files to be scanned are stored in the corresponding sub-folders in the assembly folder. For example, If the [assembly file version](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning) of the repo is 1.0.0.0, it is required to create a folder in the assembly folder, naming it as 1.0.0.0. Then put files to be scanned in the Folder 1.0.0.0.
 
 ![Assembly Folder](image/AssemblyFolder.png)
+
 **Assembly Folder**
 
 #### Version Folder Path
 The location of the version.txt file that stores an assembly file version, for example, 1.0.0.0. If 1.0.0.0 is set in version.txt, the DGT will scan files in the folder with the path AssemblyFolder/1.0.0.0.
 
 ![version.txt and its content](image/Version.txtAndItsContent.png)
+
 **version.txt and its content**
 
 #### Cache Folder Path
 Scanned results will be stored under this path.
 
 ![Cache Folder](image/CacheFolder.png)
+
 **Cache Folder**
 
 #### ApiPort Path
 The physical path of ApiPort.exe or ApiPort.dll. The ApiPort can determine the compatibility of an API.
 
 ![ApiPort.exe](image/ApiPort.exe.png)
+
 **ApiPort.exe**
 
 #### Customised Folder Configuration
@@ -187,11 +206,14 @@ Users are allowed to customize the configuration by following the steps below.
 - Users are allowed to customize listening ports in the script.
 
 ![Customized listening ports](image/CustomizedListeningPorts.png)
+
 **Customized Listening Ports**
 
 #### Neo4j and SQL Server Configuration
 Enter the Neo4j and SQL Server configuration in the script (using parameters from 2.1.2 and 2.2.2).
+
 ![Configure With Neo4j And Sql Server](image/ConfigureWithNeo4jAndSqlServer.png)
+
 **Configure with Neo4j and Sql Server**
 
 #### Repo Name
@@ -210,8 +232,11 @@ Name of the repo, the default name is DefaultRepo, open to be modified when runn
 - .NET Standard Exts: .NET Standard Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
   - .Net Core Exts and .Net Standard Exts determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number 0 is going to disable the check. 
   - Compatible means an API can work in a new environment. When setting configurations, you are allowed to set X2 and Y2 shown in the figure below.
+
 ![The Condition Of Api Is Compatible In A New Environment](image/TheConditionOfApiIsCompatibleInANewEnvironment.png)
+
 **The condition of Api is compatible in a new environment**
+
 - Repo: Name of the repo.
 - Assembly Folder Path
 - Cache Folder Path
@@ -221,7 +246,9 @@ Name of the repo, the default name is DefaultRepo, open to be modified when runn
 ##### Default Configuration
 Users are allowed to modify the default configuration.
 ![Default Configuration](image/DefaultConfiguration.png)
+
 **Default Configuration**
+
 [More Information](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/operation-manual/system/repo-config)
 
 ## 3.4 Recurring job configuration
@@ -230,7 +257,7 @@ In the default configuration, the recurring job function is disabled, meaning th
 #### Configuration
 The recurring job is enabled by setting "CrontabString". The "CrontabString" format consists of five fields, and it can convert into a time interval. The default value of "CrontabString" is "* * * * *", meaning the recurring job function is disabled. [More information about setting "CrontabString"](https://en.wikipedia.org/wiki/Cron).
 
-Follow the steps below to set the  "CrontabString".
+Follow the steps below to set the "CrontabString".
 1. Find the appsettings.json file in the path .\workZone\ReleaseScan\netcoreapp3.1\appsettings.json.
 2. Open the file, set the value of "CrontabString", then close the file.
 3. Set a version in the version.txt, which determines the next folder to be scanned.
@@ -246,12 +273,14 @@ Follow the steps below to set the  "CrontabString".
 The assembly package demo consists of two folders, each folder corresponds to a version, 1.0.0.0 and 1.0.0.1, they are prepared for the Dependency Graph Tool (DGT) to scan, analyze, and draw the graph. The structures of the files in each folder are shown below.
 
 ![Folder 1.0.0.0](image/Folder1.0.0.0.png)
+
 **Folder 1.0.0.0**
 
 Folder 1.0.0.0 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
 ### Start with a script
 
 ![Folder 1.0.0.1](image/Folder1.0.0.1.png)
+
 **Folder 1.0.0.1**
 
 Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Granddaughter.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
@@ -262,7 +291,9 @@ Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 - The dependency relation between every two nodes is similar to that of the ethical relation. For example, Root.dll node depends on Son.dll and Daughter.dll nodes. Son.dll node depends on Grandson.dll and Nuget.Common.dll nodes.
 - In most cases, all the assembly file versions of a repo are the same, which can help to differentiate whether the current repo is NuGet or not.
 - Generally, the assembly file version is the same as the [build version](https://searchsoftwarequality.techtarget.com/definition/build). Get [more information](https://docs.microsoft.com/en-us/dotnet/standard/assembly/set-attributes) here if user demands to change the assembly file version.
+
 ![Root.dll](image/Root.dll.png)
+
 **The assembly file version is the same as the build version (product version).**
 
 ## 4.2 Start with a script
@@ -279,12 +310,16 @@ Do you want to have a quick start with a demo (pre-prepared asembly files will b
 ```
 - Start four processes.
 - Monitor four processes.
+
 ![Start and monitor 4 processes](image/StartAndMonitor4Processes.png)
+
 **Start and monitor 4 processes**
 
 #### Decision Tree
-The decision tree indicates the main decisions made in the script and the corresponding results.## Operation Manual
+The decision tree indicates the main decisions made in the script and the corresponding results.
+
 ![Decision Tree](image/DecisionTree.png)
+
 **Decision Tree of the script**
 
 #### Scan and analyze your files
@@ -311,7 +346,9 @@ Use default settings and demo to have a quick start.
 - Service starts.
 
 Users are allowed to reset tables in SQL Server.
+ 
 ![Reset tables](image/ResetTables.png)
+
 **Reset tables**
 
 # 5. Operation Manual
@@ -326,39 +363,52 @@ The dashboard contains four charts.
 - [All processes per build](#All-processes-per-build), showing the overall situation for all onboard processes.
 
 ![dashboard overview](image/DashboardOverview.png)
+
 **Dashboard overview**
 
 #### Pie charts of version's status
+
 ![Proportion](image/Proportion.png)
+
 **Proportion of compatibles and incompatibles**
 
 - Total: Sum of the compatible and incompatible APIs from DefaultRepo and Nuget. For example, in the figure above, the number of compatible APIs in Total, 14, comes from 4 compatible APIs in DefaultRepo and 10 Compatible APIs from Nuget; and the number of Incompatible APIs in Total, 0, comes from 0 Incompatible APIs in - DefaultRepo and 0 Incompatible APIs from Nuget.
 DefaultRepo: The content of the DefaultRepo pie chart comes from your repo (or your project). For example, in Demo 1.0.0.0 shown below, Root.dll, Son.dll, Daughter.dll, and GrandSon.dll are created by yourself (you define them) in your repo (or project), so the DefaultRepo pie chart is made up by these four files (nodes). Since APIs of them are all compatible, the pie chart shows that Compatible is 4 and Incompatible is 0.
+
 ![Demo 1.0.0.0](image/Demo1.0.0.0.png)
+
 **Demo 1.0.0.0**
+
 - Nuget: NuGet is the package manager for .NET. The pie chart shows the number of compatible and incompatible APIs coming from NuGet.  For the demo case, Demo 1.0.0.0 uses 10 APIs from NuGet, so in the pie chart, the compatible is 10 and the incompatible is 0.
 - Package: It shows the number of compatible and incompatible assemblies in all NuGet packages. The information in this chart is set manually. The default info shows that all the APIs are incompatible, while users can mark any NuGet assemblies compatible. The total number of APIs in the Package pie chart is the same as those in the NuGet pie chart. Visit [Assembly Detail](#5.2.5-Assembly-Details) for more information. 
 #### Trend over builds
+
 ![TrendOverBuilds](image/TrendOverBuilds.png)
+
 **Number of compatibles and incompatibles of each build**
 
 #### Overlaps per build
+
 ![Overlaps Per Build](image/OverlapsPerBuild.png)
+
 ** Overlaps and differences between current build and others**
 
 #### All processes per build
+
 ![All processes](image/AllProcessesPerBuild.png)
+
 **Number of compatibles and incompatibles of each process in the current build.**
 
 #### Note
 - The results shown on this page are from Demo 1.0.0.0.
 - Make sure you match the version and process name. The version is the file version of your repo, and the process name can be found in the Process Config page.  
+
 ![version and process](image/VersionAndProcess.png)
+
 **Version and process**
 
 ## 5.2 Tools
 ### 5.2.1 Process's Root Parents
-
 #### Usage
 View the name of assemblies directly referred by a process.#### 5.2.2 Process to Assembly Path
 #### Instruction
@@ -367,6 +417,7 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 3. Get Results.
 
 ![overview](image/Process'sRootParentOverview.png)
+
 **Process's Root Parent Overview**
 
 ### 5.2.2 Process to Assembly Path
@@ -381,7 +432,9 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 4. Uncheck All paths and fill path number with a specific number to customize the number of results to display (up to 500, optional). Or check All paths to see all the results.
 4. Click on the X button in the skips list to remove the assembly from the list (optional). 
 5. Get Results.
+
 ![Process to assembly](image/ProcessToAssembly.png)
+
 **Multiple paths start from process to target assembly Overview**
 
 ### 5.2.3 Assembly to Assembly Path
@@ -398,6 +451,7 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 5. Get Results.
 
 ![Assembly to assembly](image/Assembly2AssemblyOverview.png)
+
 **Assembly to assembly overview**
 
 ### 5.2.4 Process's Assemblies
@@ -411,7 +465,9 @@ Filter data with assembly name or other conditions.
 Click on the assembly in results to view its details (optional). 
 Click on Export Total to export the results as excel (optional). 
 Get Results.
+
 ![Process'sAsssembliesOverview](image/Process'sAsssembliesOverview.png)
+
 **Process's asssemblies overview**
 
 ### 5.2.5 Assembly Details
@@ -427,10 +483,13 @@ See details of an assembly
 1. Select the Version and Assembly to get detailed information. 
 2. Select the process to filter data. 
 3. Get Results.
+
 ![AssemblyDetailsOverview](image/AssemblyDetailsOverview.png)
+
 **Assembly details overview**
 
 ![Assembly details overview](image/AssemblyDetailsOverview.png)
+
 **Assembly details overview**
 
 ##### Set the compatibility of assemblies in the Package pie chart
@@ -440,10 +499,15 @@ See details of an assembly
 4. Click Add Package Info (only enable when HasNetCoreVersion is True).
 5. Input package information.
 6. Get Results.
+
 ![SetCompatibilityOfAssemblies](image/SetCompatibilityOfAssemblies.png)
+
 **Set the compatibility of assemblies in Package pie chart**
+
 If you set the compatibility successfully, the Create button will be changed to Update and you will see the figure below.
+
 ![SetCompatibilitySuccessfully](image/SetCompatibilitySuccessfully.png)
+
 **Set compatibility successfully**
 
 ### 5.2.6 Difference
@@ -456,10 +520,13 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Select the version and process/assembly name of base-build and aim-build to view results. 
 - Click on the number of differences to view details. 
 - Get Results.
+
 ![DifferenceDetails](image/DifferenceDetails.png)
+
 **Difference overview**
 
 ![GoIntoDetails](image/GoIntoDetails.png)
+
 **Go into details**
 
 ### 5.2.7 New Assembly Check
@@ -472,9 +539,13 @@ If you set the compatibility successfully, the Create button will be changed to 
 - "Not safe" means the change or addition of assembly will have an impact on the original process, which needs to be analyzed.
 - "Safe" means changing or adding an assembly will not affect the original process.
 - Get Results.
+
 ![Operations](image/Operations.png)
+
 **Operations**
+
 ![ViewResults](image/ViewResults.png)
+
 **View results**
 
 ### 5.2.8 Assembly Children Paths
@@ -486,7 +557,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Select Must Passing Assembly.
 - Choose Path number or All paths checkbox, this will affect the number of results to display.
 - Get Results.
+
 ![AssemblyChildrenPathsOverview](image/AssemblyChildrenPathsOverview.png)
+
 **Assembly Children Paths Overview**
 ## 5.3 Type Analysis
 ### 5.3.1 Process's Types
@@ -498,7 +571,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 2. Select the Version and Process name. 
 3. Add filter according to a specific condition (optional). 
 4. Get Results.
+
 ![Process's Types Overview](image/Process'sTypesOverview.png)
+
 **Process's types overview**
 
 ### 5.3.2 One Shortest Path Process to Type
@@ -508,7 +583,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 #### Instruction
 1. Select Version, Source Process, and Target Type.
 2. Get Results.
+
 ![One Shortest Path Process To Type Overview](image/ShortestPathP2T.png)
+
 **One Shortest Path Process To Type Overview**
 
 ### 5.3.3 One Shortest Path From Assembly to 
@@ -517,7 +594,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 #### Instruction
 1. Select Version, Start Assembly, and Target Type.
 2. Get Results.
+
 ![ShortestPathA2T](image/ShortestPathA2T.png)
+
 **One Shortest Path From Assembly To Type Overview**
 
 ### 5.3.4 Multi-Path Process to Type
@@ -529,7 +608,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Select Skip Types and Skip Assemblies.
 - Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional), or check "All paths" to see all the results.
 - Get Results.
+
 ![PTO](image/PTO.png)
+
 **Process's Type Overview**
 
 ### 5.3.5 Multi-Path Assembly to Type
@@ -540,7 +621,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 2. Select Skip.
 3. Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional). Or check "All paths" to see all the results.
 4. Get Results.
+
 ![MultiPathA2T](image/MultiPathA2T.png)
+
 **Multi-Path Assembly To Type Overview**
 
 ## 5.4 System
@@ -554,7 +637,9 @@ If you set the compatibility successfully, the Create button will be changed to 
 2. Enter a process name.
 3. Add Start Assemblies.
 4. Click OK.
+
 ![](image/AddNew.png)
+
 **Add new operation**
 
 ##### Edit
@@ -562,13 +647,17 @@ If you set the compatibility successfully, the Create button will be changed to 
 2. Edit the process name.
 3. Edit Start Assemblies.
 4. Click OK.
+
 ![Edit](image/Edit.png)
+
 **Edit operation**
 
 ##### Delete
 1. Click Delete.
 2. Click OK.
+
 ![Delete](image/Delete.png)
+
 **Delete operation**
 
 ### 5.4.2 Repo Config
@@ -579,13 +668,17 @@ If you set the compatibility successfully, the Create button will be changed to 
 1. Click Edit.
 2. Edit settings.
 3. Click OK.
+
 ![RepoConfigEdit](image/RepoConfigEdit.png)
+
 **Edit operation**
 
 ##### Delete
 Click Delete.
 Click OK.
+
 ![RepoConfigDelete](image/RepoConfigDelete.png)
+
 **Delete operation**
 
 #### Set up
@@ -593,7 +686,9 @@ The Set up button shows up when there is no repo.
 1. Click Set up.
 2. Enter settings.
 3. Click OK.
+
 ![RepoConfigSetup](image/RepoConfigSetup.png) 
+
 **Set up operation**
 
 ### 5.4.3 Import Status
@@ -604,20 +699,26 @@ The Set up button shows up when there is no repo.
 1. Click Add new.
 2. Enter settings.
 3. Click OK.
+
 ![ImportStatusAdd](image/ImportStatusAdd.png)
+
 **Add new operation**
 
 ##### Edit
 1. Click Edit.
 2. Edit settings.
 3. Click OK.
+
 ![ImportStatusEdit](image/ImportStatusEdit.png)
+
 **Edit operation**
 
 ##### Delete
 1. Click Delete.
 2. Click OK.
+
 ![ImportStatusDelete](image/ImportStatusDelete.png)
+
 **Delete operation**
 
 ### 5.4.4 Error Log
@@ -627,5 +728,7 @@ The Set up button shows up when there is no repo.
 #### Instruction
 1. Select a Version.
 2. Get results.
+
 ![error log](image/ErrorLog.png)
+
 **Error log**
