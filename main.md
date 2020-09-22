@@ -316,7 +316,7 @@ The script OneKeyDeploy.ps1 will help you conveniently start DGT. The basic proc
 - Set listening ports for four processes.
 - Configure with [SQL Server](#2.2.2-SQL-Server-Configuration) and [Neo4j](#2.1.2-Neo4j-configuration).
 - Choose to run a demo mode or run the DGT based on the customized settings.
-```Power Shell
+```PowerShell
 Do you want to have a quick start with a demo (pre-prepared asembly files will be scanned and analyzed)? 'Enter' key means 'Y'. (Y/N)
 ```
 - Start four processes.
