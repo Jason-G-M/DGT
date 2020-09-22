@@ -1,20 +1,20 @@
 # 1. Introduction
 Dependency Graph Tool (DGT) is designed to analyze and display the overall information of APIs' compatibility for .Net Core of different processes/builds in Substrate assemblies.
 
-The main functionalities of the tool contain:
+The main functionalities of DGT contain:
 - Management 
   - View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
   - Track the progress of adapting incompatible assemblies to compatible ones.
 - Analysis
-  - Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths from one assembly to another.)
+  - Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths between assemblies.)
 - Monitoring
   - Monitor the trend of changes in dependencies. 
-  - Detect the changes in the dependencies of assemblies and the dependency tree.
+  - Detect the changes in the dependency tree.
 
-## Architecture
+## 1.1 Architecture
 DGT service consists of four processes and is supported by two databases.
 
-### Processes
+### 1.1.1 Processes
 - Scan Tool
   - Scan assemblies' information.
 - Build Graph Tool
@@ -26,18 +26,18 @@ DGT service consists of four processes and is supported by two databases.
 - Front End
   - Present data.
 
-### Databases
+### 1.1.2 Databases
 - SQL DB
   - Store configuration
 - Neo4j
   - Store graph data
 
 # 2. Startup
-The Dependency Graph Tool (DGT) depends on SQL Server, Neo4j, JRE, .Net Core 3.1, Node.js, npm packages, and API Port. Please finish the installation and configuration before starting the DGT.
+The Dependency Graph Tool (DGT) depends on **SQL Server**, **Neo4j**, **JRE**, **.Net Core 3.1**, **Node.js**, **npm packages** and **API Port**. Please finish the installation and configuration before launching DGT.
 
 ## 2.1 Neo4j
 
-### 2.1.1 Neo4j Installation
+### 2.1.1 Neo4j Installations
 Visit the official website and download [Windows Neo4j Community Edition 3.5.21](https://neo4j.com/download-thanks/?edition=community&release=3.5.21&flavour=winzip&_ga=2.176909797.114973728.1598256184-1237716368.1595239954&_gac=1.195112414.1595902492.CjwKCAjw9vn4BRBaEiwAh0muDCf_xYI1PeoiFtSlHOCWO_yWQkg7QwJMjmjo0Rm-wYihI7v0nc2QMhoCSBMQAvD_BwE).
 
 ### 2.1.2 Neo4j Configuration
@@ -74,22 +74,24 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 ![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png)
 
 ## 2.2 SQL Server
+
 ### 2.2.1 SQL Server Installation
-- Either SQL Server or SQL Server Express is recommended to install.
-  - [Click here to download SQL Server.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-  - [Click here to download SQL Server Express.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- Either SQL Server or SQL Server Express is recommended.
+  - [Download SQL Server.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+  - [Download SQL Server Express.](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - Use SQL Server Management Studio (SSMS) to manage SQL Server conveniently.
-  - [Click here to download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+  - [Download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
+
 ### 2.2.2 SQL Server Configuration
-#### Authentication
-1. Open SSMS -> choose Windows Authentication type -> click Connect.
-2. Right-click your server -> choose Properties -> Click Security in the left of the window -> Set Server authentication as SQL Server and Windows Authentication mode.
+#### [Authentication](https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver15)
+1. Open SSMS -> choose **Windows Authentication** type -> click **Connect**.
+2. Right-click your server -> choose **Properties** -> Click **Security** in the left of the window -> Set **Server authentication** as **SQL Server and Windows Authentication mode**.
 3. Restart your computer.
-#### Connection string
-- SQL Server IP:  Server Address. For example, 127.0.0.1 is the IP for the local SQL Server.
-- User ID & Password: Create an account to start the server.
-  - New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
-  - Log in with your username and password: Connect -> set Authentication to SQL Server Authentication type -> enter Login and Password -> Connect.
+#### [Connection string](https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring?view=dotnet-plat-ext-3.1)
+- [SQL Server IP](https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab?view=sql-server-ver15): Server Address. For example, 127.0.0.1 is the IP for the local SQL Server.
+- [User ID & Password](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-login?view=sql-server-ver15): Create an account to start the server.
+  - New Login: Right-click **Security** -> **New** -> **Login** -> Enter Login name -> Choose **SQL Server authentication** -> Set password -> Click **OK**.
+  - Log in with your username and password: Connect -> set **Authentication** to **SQL Server Authentication** type -> enter **Login** and **Password** -> **Connect**.
 
 ![CreateLogin](image/CreateLogin.png)
 
@@ -103,8 +105,8 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 
 **User ID and password**
 
-- Name of your database: Create a new database and record the name of it.
-  - Right-click Database -> Click New Database -> Enter Database name -> Click OK. Or use your previous one. Check the name of the database. 
+- [Name of your database](https://docs.microsoft.com/en-us/sql/relational-databases/tables/create-tables-database-engine?view=sql-server-ver15): Create a new database and record the name of it.
+  - Right-click **Database** -> Click **New Database** -> Enter Database name -> Click **OK**. Or use your previous one. Check the name of the database. 
 
 ![CreateANewDatabase](image/CreateANewDatabase.png)
 
@@ -115,31 +117,32 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 **Set name of the database and click OK**
 
 #### Note
-- If you cannot create a new database in your personal SQL server account, please create it in sa account. Then, check if your personal account owns this database.
-- Please log in SQL Server with your Login and Password, and make sure you are allowed to add and edit tables in your database. If you find that your account does not have such permission, please check whether your account is the db_owner of your database.
-  - Open the server -> Security -> Login -> Right-click sa account -> Choose propertites -> Set new password -> Click Status in the left of the window -> Set Login Enable -> Click OK.
-  - Open the server -> Connect Server with sa account and your sa's password -> Security -> Login -> Right-click your personal account -> Choose propertites -> Choose User Mapping in the left of the window -> Add your database to your Login -> add db_owner -> Click OK.
+- If you cannot create a new database in your personal SQL server account, please create it in **sa** account. Then, check if your personal account owns this database.
+- Please **log in SQL Server with your Login and Password, and make sure you are allowed to add and edit tables in your database**. If you find that your account does not have such permission, please check whether your account is the db_owner of your database.
+  - Open the server -> Security -> Login -> Right-click **sa** account -> Choose propertites -> Set new password -> Click Status in the left of the window -> Set Login **Enable** -> Click **OK**.
+  - Open the server -> Connect Server with **sa** account and your **sa**'s password -> **Security** -> **Login** -> Right-click your **personal** account -> Choose **propertites** -> Choose **User Mapping** in the left of the window -> Add your database to your Login -> add **db_owner** -> Click **OK**.
 
 ![add DB](image/AddDb.png)
 
 **Add db_owner to your database**
 
-- Please remember your SQL Server IP, name of the database, Login Username, and Password, these will be used in further steps.
+- Your **SQL Server IP**, **name of the database**, **Login Username** and **Password** will be used in further steps.
 
 ## 2.3 JRE
-Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox) (only version 8u231 is supported) and install it on your local environment, [more information](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
+Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox) (only version 8u231 is supported) and install it onto your local environment, [more information](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
 
 ## 2.4 NetCore 3.1
 The Dependency Graph Tool is based on .Net Core 3.1, download from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) if it is not in your local environment, [more Information](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.7/3.1.7.md).
 
 ## 2.5 Node.js
-Download the latest [Node.js](https://nodejs.org/en/download/), run the script below in command prompt to install. Once the installation succeeded, the command prompt will dispaly the version installed, [more information](https://nodejs.org/en/docs/).
+- Download the latest [Node.js](https://nodejs.org/en/download/). Once the installation succeeded, the Command Prompt will dispaly the version installed, [more information](https://nodejs.org/en/docs/).
+- Run below script at Command Prompt to verify the installation.
 ```cmd
 node -v
 ```
 
 ## 2.6 npm
-The front-end process of the Dependency Graph Tool (DGT) depends on three npm packages (react-scripts, monaco-editor and cross-env), which will be automatically installed by the commands below triggered by the script OneKeyDeploy.ps1, users do not have to do anything, [more information](https://docs.npmjs.com/).
+The front-end process of the DGT depends on three npm packages (react-scripts, monaco-editor and cross-env), which will be automatically installed by the commands below triggered by the script OneKeyDeploy.ps1, users do not have to do anything, [more information](https://docs.npmjs.com/).
 ```cmd
 npm i react-scripts
 npm i monaco-editor
@@ -147,13 +150,17 @@ npm i cross-env
 ```
 
 ## 2.7 API Port
-Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action required, [more information](https://github.com/microsoft/dotnet-apiport).
+Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action is required, [more information](https://github.com/microsoft/dotnet-apiport).
 
 # 3. DGT configuration
+- [3.1](#3.1-Folder-configuration) and [3.2](#3.2-Script-configuration) are necessary to launch DGT service.
+- It is recommended to go to [3.3](#3.3-UI-configuration) after DGT is launched successfully.
+- [3.4](#3.4-Recurring-job-configuration) is an optional chapter for activating recurring jobs.
+
 ## 3.1 Folder configuration
 Before running the script OneKeyDeploy.ps1, it is necessary to define file paths and the version for the Dependency Graph Tool (DGT). It determines which files will be scanned by DGT.
 
-The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/deploy/demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
+The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](#4.1-Assembly-package-demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
 
 ![Default Config Folder](image/DefaultConfigFolder.png)
 
@@ -180,7 +187,7 @@ Scanned results will be stored under this path.
 
 **Cache Folder**
 
-### ApiPort Path
+### [ApiPort](#2.7-API-Port) Path
 The physical path of ApiPort.exe or ApiPort.dll. The ApiPort can determine the compatibility of an API.
 
 ![ApiPort.exe](image/ApiPort.exe.png)
@@ -197,10 +204,11 @@ Users are allowed to customize the configuration by following the steps below.
 
 #### Note 
 - Users are allowed to add files to be scanned in the assembly folder and define the corresponding version in the version.txt, but do not change the ConfigFolder structure when running the script for the first time. 
-- After running the service successfully, users can modify the folder configuration (must be matched with the customized folder configuration) in the Repo Config page.
+- After running the service successfully, users can modify the folder configuration (must be matched with the customized folder configuration) in the [Repo Config](#3.3.2-Repo-Config) page.
 - Users are recommended to keep the default path parameters (Version File Path, Assembly Folder Path, and Cache Folder Path). Files to be scanned can be moved to the assembly folder in the default Assembly Folder Path, instead of creating a new assembly folder.
 
 ## 3.2 Script configuration
+
 ### Listening Ports
 - The script will start four processes which require four different listening ports. 
 - http://localhost:8000 to 8003 are used to set the default listening ports.
@@ -211,17 +219,19 @@ Users are allowed to customize the configuration by following the steps below.
 **Customized Listening Ports**
 
 ### Neo4j and SQL Server Configuration
-Enter the Neo4j and SQL Server configuration in the script (using parameters from 2.1.2 and 2.2.2).
+Enter the Neo4j and SQL Server configuration in the script (using parameters from [2.1.2](#2.1.2-Neo4j-configuration) and [2.2.2](#2.2.2-SQL-Server-configuration)).
 
 ![Configure With Neo4j And Sql Server](image/ConfigureWithNeo4jAndSqlServer.png)
 
 **Configure with Neo4j and Sql Server**
 
 ### Repo Name
-Name of the repo, the default name is DefaultRepo, open to be modified when running the script.
+Name of the repo, the default name is **DefaultRepo**, open to be modified when running the script.
+
 ![Repo Name](image/RepoName.png)
 
 ## 3.3 UI configuration
+
 ### 3.3.1 Process Config
 - Process Name: Give a name to the current process.
 - Start Assemblies: Add or delete start assemblies for the current process.
@@ -229,10 +239,10 @@ Name of the repo, the default name is DefaultRepo, open to be modified when runn
 [More information](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/operation-manual/system/process-config)
 
 ### 3.3.2 Repo Config
-- .NET Core Exts: .NET Core Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
-- .NET Standard Exts: .NET Standard Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
-  - .Net Core Exts and .Net Standard Exts determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number 0 is going to disable the check. 
-  - Compatible means an API can work in a new environment. When setting configurations, you are allowed to set X2 and Y2 shown in the figure below.
+- [.NET Core Exts](https://docs.microsoft.com/en-us/dotnet/standard/analyzers/portability-analyzer): .NET Core Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
+- [.NET Standard Exts](https://docs.microsoft.com/en-us/dotnet/standard/analyzers/portability-analyzer): .NET Standard Extension Support Version. Includes the .NET Core APIs in addition to the Windows Compatibility Pack, which provides many of the .NET Framework available technologies. This is a recommended target for porting your app from .NET Framework to .NET Core on Windows.
+  - **.Net Core Exts** and **.Net Standard Exts** determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number **0** is going to disable the check. 
+  - **Compatible** means an API can work in a new environment. When setting configurations, you are allowed to set **X2** and **Y2** shown in the figure below.
 
 ![The Condition Of Api Is Compatible In A New Environment](image/TheConditionOfApiIsCompatibleInANewEnvironment.png)
 
@@ -253,25 +263,25 @@ Users are allowed to modify the default configuration.
 [More Information](https://app.gitbook.com/@microsoft-12/s/dependency-graph-tool/operation-manual/system/repo-config)
 
 ## 3.4 Recurring job configuration
-In the default configuration, the recurring job function is disabled, meaning the DGT can only scan files once, then analyze and indicate results. If the DGT is required to implement the recurring job (scan files multiple times in a specific time interval).
+Recurring job means scanning files multiple times in a specific time interval, this function is disabled by default, which means DGT only scan files once before analyzing and indicating results. 
 
-### Configuration
-The recurring job is enabled by setting "CrontabString". The "CrontabString" format consists of five fields, and it can convert into a time interval. The default value of "CrontabString" is "* * * * *", meaning the recurring job function is disabled. [More information about setting "CrontabString"](https://en.wikipedia.org/wiki/Cron).
+Recurring job can be manually enabled by setting "CrontabString". The "CrontabString" format consists of five fields, and can convert into a time interval. The default value of "CrontabString" is "* * * * *", which means the recurring job is disabled. [More information about setting "CrontabString"](https://en.wikipedia.org/wiki/Cron).
 
 Follow the steps below to set the "CrontabString".
-1. Find the appsettings.json file in the path .\workZone\ReleaseScan\netcoreapp3.1\appsettings.json.
-2. Open the file, set the value of "CrontabString", then close the file.
+1. Find the appsettings.json file from the path *.\workZone\ReleaseScan\netcoreapp3.1\appsettings.json*.
+2. Open the file, set the value of "CrontabString" and close it.
 3. Set a version in the version.txt, which determines the next folder to be scanned.
 
 #### Note
-- When setting the value of "CrontabString" in the appsettings.json, please do not modify other values.
-- If the recurring job function is enabled, please do not close any running process of the DGT.
+- Do not modify any other value when setting "CrontabString" in the appsettings.json.
+- If the recurring job function is enabled, do not close any running process of DGT.
 
 # 4. Deployment
 
 ## 4.1 Assembly package demo
+
 ### Demo files
-The assembly package demo consists of two folders, each folder corresponds to a version, 1.0.0.0 and 1.0.0.1, they are prepared for the Dependency Graph Tool (DGT) to scan, analyze, and draw the graph. The structures of the files in each folder are shown below.
+The assembly package demo consists of two folders, either folder corresponds to version 1.0.0.0 and 1.0.0.1 respectively, they are prepared for DGT to scan, analyze and generate the graph. The structures of the files in both folders are shown below.
 
 ![Folder 1.0.0.0](image/Folder1.0.0.0.png)
 
@@ -298,10 +308,10 @@ Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 **The assembly file version is the same as the build version (product version).**
 
 ## 4.2 Start with a script
-DGT is supported by Windows OS. Before running DGT, make sure [PowerShell](https://docs.microsoft.com/en-us/powershell/) as been installed. Right-click OneKeyDeploy.ps1, then click Run with PowerShell.
+DGT is supported by Windows OS. Before running DGT, make sure [PowerShell](https://docs.microsoft.com/en-us/powershell/) has been installed. Right-click **OneKeyDeploy.ps1**, then click **Run with PowerShell**.
 
 ### Procedure
-The script OneKeyDeploy.ps1 will help you conveniently start the Dependency Graph Tool (DGT). The basic procedure of it is listed below:
+The script OneKeyDeploy.ps1 will help you conveniently start DGT. The basic procedure is listed below:
 - Set a version in version.txt.
 - Set listening ports for four processes.
 - Configure with [SQL Server](#2.2.2-SQL-Server-Configuration) and [Neo4j](#2.1.2-Neo4j-configuration).
@@ -323,9 +333,9 @@ The decision tree indicates the main decisions made in the script and the corres
 
 **Decision Tree of the script**
 
-#### Scan and analyze your files
+### Scan and analyze your files
 Customize settings.
-- Activate the recurring job or not.
+- Activate the [recurring job](#3.4-Recurring-job-configuration) or not.
 - Create a new folder with a name same as your repo's assembly file version in Assembly Folder.
 - Add files to be scanned into the new folder.
 - Set the content of the version.txt corresponding to the version of the assembly files.
@@ -335,8 +345,8 @@ Customize settings.
 - Initialize tables in SQL Server or not in the script.
 - Customize a repo name in the script.
 - Service starts.
-- Edit configuration in the  Repo Config page in UI.
-- Add a new process in the Process Config page in UI.
+- Edit configuration in the [Repo Config](#5.4.2-Repo-Config) page in UI.
+- Add a new process in the [Process Config](#5.4.1-Process-Config) page in UI.
 
 #### Note
 Use default settings and demo to have a quick start.
