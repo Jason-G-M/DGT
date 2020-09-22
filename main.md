@@ -32,7 +32,6 @@ DGT service consists of four processes and is supported by two databases.
 - Neo4j
   - Store graph data
 
-
 # 2. Startup
 The Dependency Graph Tool (DGT) depends on SQL Server, Neo4j, JRE, .Net Core 3.1, Node.js, npm packages, and API Port. Please finish the installation and configuration before starting the DGT.
 
@@ -42,8 +41,8 @@ The Dependency Graph Tool (DGT) depends on SQL Server, Neo4j, JRE, .Net Core 3.1
 Visit the official website and download [Windows Neo4j Community Edition 3.5.21](https://neo4j.com/download-thanks/?edition=community&release=3.5.21&flavour=winzip&_ga=2.176909797.114973728.1598256184-1237716368.1595239954&_gac=1.195112414.1595902492.CjwKCAjw9vn4BRBaEiwAh0muDCf_xYI1PeoiFtSlHOCWO_yWQkg7QwJMjmjo0Rm-wYihI7v0nc2QMhoCSBMQAvD_BwE).
 
 ### 2.1.2 Neo4j Configuration
-##### Run Neo4j
-###### Run as a Windows Service
+#### Run Neo4j
+##### Run as a Windows Service
 Open Command Prompt and direct into Neo4j 3.5.21 file path.
 1. Install service, use:
 ```cmd
@@ -59,18 +58,18 @@ echo dbms.memory.heap.max_size=16g >> conf\neo4j.conf
 ```cmd
 bin\neo4j start
 ```
-###### Run as a Console Application
+##### Run as a Console Application
 Try this method if Neo4j cannot start as a windows service.
 Run Neo4j as a console application, use:
 ```cmd
 bin\neo4j console
 ```
-##### Set Neo4j Username and Password
+#### Set Neo4j Username and Password
 1. Visit the login page of Neo4j. Find the address on the console prompt, for example, http://localhost:7474/.
 2. Choose Authentication type as Username / Password, enter neo4j for both username and password to initialize the account.
 3. Enter a new password. 
 4. Connect Neo4j.
-##### Neo4j Host
+#### Neo4j Host
 Neo4j Host can be found after logging in, for example, the Neo4j Host in the figure below is bolt://127.0.0.1:7687.
 ![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png)
 
@@ -82,11 +81,11 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
 - Use SQL Server Management Studio (SSMS) to manage SQL Server conveniently.
   - [Click here to download SSMS.](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 ### 2.2.2 SQL Server Configuration
-##### Authentication
+#### Authentication
 1. Open SSMS -> choose Windows Authentication type -> click Connect.
 2. Right-click your server -> choose Properties -> Click Security in the left of the window -> Set Server authentication as SQL Server and Windows Authentication mode.
 3. Restart your computer.
-##### Connection string
+#### Connection string
 - SQL Server IP:  Server Address. For example, 127.0.0.1 is the IP for the local SQL Server.
 - User ID & Password: Create an account to start the server.
   - New Login: Right-click Security -> New -> Login -> Enter Login name -> Choose SQL Server authentication -> Set password -> Click OK.
@@ -138,13 +137,15 @@ Download the latest [Node.js](https://nodejs.org/en/download/), run the script b
 ```cmd
 node -v
 ```
-### npm
+
+## 2.6 npm
 The front-end process of the Dependency Graph Tool (DGT) depends on three npm packages (react-scripts, monaco-editor and cross-env), which will be automatically installed by the commands below triggered by the script OneKeyDeploy.ps1, users do not have to do anything, [more information](https://docs.npmjs.com/).
 ```cmd
 npm i react-scripts
 npm i monaco-editor
 npm i cross-env
 ```
+
 ## 2.7 API Port
 Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action required, [more information](https://github.com/microsoft/dotnet-apiport).
 
@@ -158,35 +159,35 @@ The following paragraph is based on the default config folder, ConfigFolder, con
 
 **Default Config Folder**
 
-#### Assembly Folder Path
+### Assembly Folder Path
 The physical path of the folder containing assembly files to be scanned. Under the assembly folder, files to be scanned are stored in the corresponding sub-folders in the assembly folder. For example, If the [assembly file version](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning) of the repo is 1.0.0.0, it is required to create a folder in the assembly folder, naming it as 1.0.0.0. Then put files to be scanned in the Folder 1.0.0.0.
 
 ![Assembly Folder](image/AssemblyFolder.png)
 
 **Assembly Folder**
 
-#### Version Folder Path
+### Version Folder Path
 The location of the version.txt file that stores an assembly file version, for example, 1.0.0.0. If 1.0.0.0 is set in version.txt, the DGT will scan files in the folder with the path AssemblyFolder/1.0.0.0.
 
 ![version.txt and its content](image/Version.txtAndItsContent.png)
 
 **version.txt and its content**
 
-#### Cache Folder Path
+### Cache Folder Path
 Scanned results will be stored under this path.
 
 ![Cache Folder](image/CacheFolder.png)
 
 **Cache Folder**
 
-#### ApiPort Path
+### ApiPort Path
 The physical path of ApiPort.exe or ApiPort.dll. The ApiPort can determine the compatibility of an API.
 
 ![ApiPort.exe](image/ApiPort.exe.png)
 
 **ApiPort.exe**
 
-#### Customised Folder Configuration
+### Customised Folder Configuration
 Users are allowed to customize the configuration by following the steps below.
 1. Create an assembly folder.
 2. Create a version.txt and enter a version corresponding to the repo's assembly file version (For example, if the repo's assembly file version is 1.0.0.3, then the content of the version.txt must be 1.0.0.3.).
@@ -200,7 +201,7 @@ Users are allowed to customize the configuration by following the steps below.
 - Users are recommended to keep the default path parameters (Version File Path, Assembly Folder Path, and Cache Folder Path). Files to be scanned can be moved to the assembly folder in the default Assembly Folder Path, instead of creating a new assembly folder.
 
 ## 3.2 Script configuration
-#### Listening Ports
+### Listening Ports
 - The script will start four processes which require four different listening ports. 
 - http://localhost:8000 to 8003 are used to set the default listening ports.
 - Users are allowed to customize listening ports in the script.
@@ -209,14 +210,14 @@ Users are allowed to customize the configuration by following the steps below.
 
 **Customized Listening Ports**
 
-#### Neo4j and SQL Server Configuration
+### Neo4j and SQL Server Configuration
 Enter the Neo4j and SQL Server configuration in the script (using parameters from 2.1.2 and 2.2.2).
 
 ![Configure With Neo4j And Sql Server](image/ConfigureWithNeo4jAndSqlServer.png)
 
 **Configure with Neo4j and Sql Server**
 
-#### Repo Name
+### Repo Name
 Name of the repo, the default name is DefaultRepo, open to be modified when running the script.
 ![Repo Name](image/RepoName.png)
 
@@ -243,7 +244,7 @@ Name of the repo, the default name is DefaultRepo, open to be modified when runn
 - ApiPort Path
 - Version File Path
 
-##### Default Configuration
+#### Default Configuration
 Users are allowed to modify the default configuration.
 ![Default Configuration](image/DefaultConfiguration.png)
 
@@ -254,7 +255,7 @@ Users are allowed to modify the default configuration.
 ## 3.4 Recurring job configuration
 In the default configuration, the recurring job function is disabled, meaning the DGT can only scan files once, then analyze and indicate results. If the DGT is required to implement the recurring job (scan files multiple times in a specific time interval).
 
-#### Configuration
+### Configuration
 The recurring job is enabled by setting "CrontabString". The "CrontabString" format consists of five fields, and it can convert into a time interval. The default value of "CrontabString" is "* * * * *", meaning the recurring job function is disabled. [More information about setting "CrontabString"](https://en.wikipedia.org/wiki/Cron).
 
 Follow the steps below to set the "CrontabString".
@@ -269,7 +270,7 @@ Follow the steps below to set the "CrontabString".
 # 4. Deployment
 
 ## 4.1 Assembly package demo
-#### Demo files
+### Demo files
 The assembly package demo consists of two folders, each folder corresponds to a version, 1.0.0.0 and 1.0.0.1, they are prepared for the Dependency Graph Tool (DGT) to scan, analyze, and draw the graph. The structures of the files in each folder are shown below.
 
 ![Folder 1.0.0.0](image/Folder1.0.0.0.png)
@@ -299,7 +300,7 @@ Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 ## 4.2 Start with a script
 DGT is supported by Windows OS. Before running DGT, make sure [PowerShell](https://docs.microsoft.com/en-us/powershell/) as been installed. Right-click OneKeyDeploy.ps1, then click Run with PowerShell.
 
-#### Procedure
+### Procedure
 The script OneKeyDeploy.ps1 will help you conveniently start the Dependency Graph Tool (DGT). The basic procedure of it is listed below:
 - Set a version in version.txt.
 - Set listening ports for four processes.
@@ -315,7 +316,7 @@ Do you want to have a quick start with a demo (pre-prepared asembly files will b
 
 **Start and monitor 4 processes**
 
-#### Decision Tree
+### Decision Tree
 The decision tree indicates the main decisions made in the script and the corresponding results.
 
 ![Decision Tree](image/DecisionTree.png)
@@ -355,7 +356,7 @@ Users are allowed to reset tables in SQL Server.
 ## 5.1 Dashboard
 This page is designed to display overall information of compatible and incompatible APIs of different processes in different builds. The data of this page is from analyzing the demo we have prepared.
 
-#### Charts
+### Charts
 The dashboard contains four charts.
 - [Pie charts of version's status](#Pie-charts-of-version's-status), showing the number of compatible and incompatible APIs.
 - [Trend over builds](#Trend-over-builds), showing the version status change over time.
