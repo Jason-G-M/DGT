@@ -7,7 +7,7 @@ The main functionalities of DGT contain:
   - View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
   - Track the progress of adapting incompatible assemblies to compatible ones.
 - Analysis
-  - Analyze the level relationship of assemblies/types. (e.g. paths from a process to an assembly, or paths between assemblies.)
+  - Analyze the level relationship of assemblies/types. (e.g. paths from a root assembly of a process to some assembly, or paths between assemblies.)
 - Monitoring
   - Monitor the trend of changes in dependencies. 
   - Detect the changes in the dependency tree.
@@ -48,7 +48,7 @@ DGT service consists of four processes and is supported by two databases.
 
 # 2. Startup
 
-The Dependency Graph Tool (DGT) depends on **SQL Server**, **Neo4j**, **JRE**, **.Net Core 3.1**, **Node.js**, **npm packages** and **API Port**. Please finish the installation and configuration before launching DGT.
+DGT depends on **SQL Server**, **Neo4j**, **JRE**, **.Net Core 3.1**, **Node.js**, **npm packages** and **API Port**. Please finish the installation and configuration before launching DGT.
 
 ## 2.1 Neo4j
 
@@ -164,7 +164,7 @@ Neo4j depends on JRE, please download [jre-8u231-windows-x64.exe](https://www.or
 
 ## 2.4 NetCore 3.1
 
-The Dependency Graph Tool is based on .Net Core 3.1, download from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) if it is not in your local environment, [more Information](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.7/3.1.7.md).
+DGT is based on .Net Core 3.1, download from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) if it is not in your local environment, [more Information](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.7/3.1.7.md).
 
 ## 2.5 Node.js
 
@@ -199,7 +199,7 @@ Download [API Port](https://aka.ms/apiportdownload) and unzip it, no more action
 
 ## 3.1 Folder configuration
 
-Before running the script OneKeyDeploy.ps1, it is necessary to define file paths and the version for the Dependency Graph Tool (DGT). It determines which files will be scanned by DGT.
+Before running the script OneKeyDeploy.ps1, it is necessary to define file paths and the version for DGT. It determines which files will be scanned by DGT.
 
 The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](#4.1-Assembly-package-demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
 
@@ -672,6 +672,42 @@ If you set the compatibility successfully, the Create button will be changed to 
 ![AssemblyChildrenPathsOverview](image/AssemblyChildrenPathsOverview.png "Assembly Children Paths Overview")
 
 **Assembly Children Paths Overview**
+
+### 5.2.9 Assembly Splitter
+
+#### Usage
+
+- Suggest a possible solution for assembly splitting.
+
+#### Instruction
+- Select build version.
+- Select a target assembly.
+- Input types that to be put together in same assembly, if any.
+- Click on "Generate Split Solution" button and get result.
+
+![SearchInstruction](image/AssemblySplitter/SearchInstruction.png "Instruction")
+
+**Instruction of searching**
+
+![ResultFirstTab](image/AssemblySplitter/Result_FirstTab.png "First tab of the result")
+
+**The result is shown in 3 tabs, the first one shows the incoming and outgoing references to the target assembly before splitting**
+
+![ResultSecondTab](image/AssemblySplitter/Result_SecondTab.png "Second tab of the result")
+
+**The second tab shows a possible way to split the assembly**
+
+![ResultSecondTabDetail](image/AssemblySplitter/Result_SecondTab_Detail.png "Details of the second tab")
+
+**Expand one of the child assemblies, there are types included, internal and outgoing references**
+
+![ResultThirdTab](image/AssemblySplitter/Result_ThirdTab.png "Third tab of the result")
+
+**The third tab shows all the incoming references**
+
+![ResultThirdTabDetail](image/AssemblySplitter/Result_ThirdTab_Detail.png "Details of the third tab")
+
+**Expand one of the references, there are child assemblies called by this reference, and the outgoing references**
 
 ## 5.3 Type Analysis
 
