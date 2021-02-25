@@ -710,6 +710,26 @@ If you set the compatibility successfully, the Create button will be changed to 
 
 **Expand one of the references to see the child assemblies called and the outgoing references**
 
+On applying Equal Inward Assemblies:
+
+![EqualInwardFormat](image/AssemblySplitter/EqualInwardFormat.png "Format of Equal Inward Assemblies")
+
+**Input format of Equal Inward Assemblies**
+
+![EqualInwardResult](image/AssemblySplitter/EqualInwardResult.png "Incoming references share the same dependency")
+
+**The solution will try making selected incoming references share the same dependency**
+
+On applying Type Closures:
+
+![TypeClosureFormat](image/AssemblySplitter/TypeClosureFormat.png "Format of Type Closures, same with Equal Inward Assemblies")
+ 
+**Input format of Type Closures, same with that of Equal Inward Assemblies** 
+
+![TypeClosureResult](image/AssemblySplitter/TypeClosureResult.png "The solution arrange types in same brackets into same child assembly")
+
+**The solution will arrange types in same brackets into same child assemblies"**
+
 ## 5.3 Type Analysis
 
 ### 5.3.1 Process's Types
