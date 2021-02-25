@@ -682,6 +682,7 @@ If you set the compatibility successfully, the Create button will be changed to 
 #### Instruction
 - Select build version.
 - Select a target assembly.
+- Input name of incoming references to put types called in same assemblies, if any.
 - Input types that to be put together in same assembly, if any.
 - Click on "Generate Split Solution" button and get result.
 
@@ -691,23 +692,23 @@ If you set the compatibility successfully, the Create button will be changed to 
 
 ![ResultFirstTab](image/AssemblySplitter/Result_FirstTab.png "First tab of the result")
 
-**The result is shown in 3 tabs, the first one shows the incoming and outgoing references to the target assembly before splitting**
+**The result paged in 3 tabs, the first one shows the incoming and outgoing references to the target assembly before splitting**
 
 ![ResultSecondTab](image/AssemblySplitter/Result_SecondTab.png "Second tab of the result")
 
-**The second tab shows a possible way to split the assembly**
+**The second tab shows a possible solution of splitting**
 
 ![ResultSecondTabDetail](image/AssemblySplitter/Result_SecondTab_Detail.png "Details of the second tab")
 
-**Expand one of the child assemblies, there are types included, internal and outgoing references**
+**Expand one of the child assemblies to see the types included, internal and outgoing references**
 
 ![ResultThirdTab](image/AssemblySplitter/Result_ThirdTab.png "Third tab of the result")
 
-**The third tab shows all the incoming references**
+**The third tab lists all the incoming references**
 
 ![ResultThirdTabDetail](image/AssemblySplitter/Result_ThirdTab_Detail.png "Details of the third tab")
 
-**Expand one of the references, there are child assemblies called by this reference, and the outgoing references**
+**Expand one of the references to see the child assemblies called and the outgoing references**
 
 ## 5.3 Type Analysis
 
