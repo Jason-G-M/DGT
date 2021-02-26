@@ -730,6 +730,24 @@ On applying Type Closures:
 
 **The solution will arrange types in same brackets into same child assemblies"**
 
+#### Machenism
+
+This is a brief introduction of how the target assembly is splitted. Assuming we are going to split the assembly X, which is referenced by Y and Z.
+
+![Machenism1](image/AssemblySplitter/SplitRule1.png "Before splitting")
+
+**Y and Z are assemblies depending our target assembly X, a,b,c,d and e are types of X**
+
+On splitting, types of the target assembly directly depended by parent assemblies are "colored" respectively (a and b), then the coloring spreads through the reference of each colored type. Types with multiple up-level types in different colors will be given a new color (d is given a new color).
+When the coloring is done, types are separated into groups according to their colors (a and b are seprated into different assemblies, d and e in same assembly). Types that had never been colored are separated into "Untouchable part" group (c in Untouchable part).
+
+![Machenism2](image/AssemblySplitter/SplitRule2.png "On splitting")
+
+**The splitting machenism**
+
+In condition of "Equal inward assemblies" is applied, types called by bundled incoming references will be colored same (if Y and Z are "Equal", a and b will be colored same).
+In condition of "Type Closures" is applied, bundled types will be colored same in any condition (if a and b are bundled, they always have the same color).
+
 ## 5.3 Type Analysis
 
 ### 5.3.1 Process's Types
