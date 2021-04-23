@@ -2,16 +2,11 @@
 
 Dependency Graph Tool (DGT) is designed to analyze and display the overall information of APIs' compatibility for .Net Core of different processes/builds in Substrate assemblies.
 
-The main functionalities of DGT contain:
-- Management
-  - View the number of compatible and incompatible assemblies. (e.g. Repo and NuGet compatibility.)
-  - Track the progress of adapting incompatible assemblies to compatible ones.
-- Analysis
-  - Analyze the level relationship of assemblies/types. (e.g. paths from a root assembly of a process to some assembly, or paths between assemblies.)
-- Monitoring
-  - Monitor the trend of changes in dependencies. 
-  - Detect the changes in the dependency tree.
+# 2. Install & Run
 
+Run *start.ps1* or *docker-compose up* at the root path.
+
+<!--
 ## 1.1 Architecture
 
 DGT service consists of four processes and is supported by two databases.
@@ -332,12 +327,32 @@ Follow the steps below to set the "CrontabString".
 - If the recurring job function is enabled, do not close any running process of DGT.
 
 ---
+-->
 
+# 3. Configuration
+
+Config the name of processes and starting assemblies before scanning.
+
+## Instruction
+
+- Click ADD NEW to add a new config.
+
+![process config](image/System/ProcessConfig.png "process config")
+
+- Input process name and starting assemblies in the dialogue, click OK to submit.
+
+![dialogue](image/System/ProcessConfigPopUp.png "dialogue")
+
+- Click EDIT or DELETE to update or remove an existing config.
+
+![process config edit](image/System/ProcessConfigEdit.png "process config edit")
+
+<!--
 # 4. Deployment
+-->
+# 4 Assembly package demo
 
-## 4.1 Assembly package demo
-
-### Demo files
+## Demo files
 
 The assembly package demo consists of two folders, either folder corresponds to version 1.0.0.0 and 1.0.0.1 respectively, they are prepared for DGT to scan, analyze and generate the graph. The structures of the files in both folders are shown below.
 
@@ -346,7 +361,7 @@ The assembly package demo consists of two folders, either folder corresponds to 
 **Folder 1.0.0.0**
 
 Folder 1.0.0.0 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
-### Start with a script
+## Start with a script
 
 ![Folder 1.0.0.1](image/Folder1.0.0.1.png "Folder 1.0.0.1")
 
@@ -354,7 +369,7 @@ Folder 1.0.0.0 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 
 Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Granddaughter.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
 
-#### Note 
+### Note 
 
 - 1.0.0.0 and 1.0.0.1 are [assembly file versions](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning), which means in Folder 1.0.0.0, all the assembly file versions of the repo are 1.0.0.0. The rule also adapts to Folder 1.0.0.1.
 - In the figures of the files structures, system assemblies have been hidden.
@@ -365,7 +380,7 @@ Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 ![Root.dll](image/Root.dll.png "Root.dll")
 
 **The assembly file version is the same as the build version (product version).**
-
+<!--
 ## 4.2 Start with a script
 
 DGT is supported by Windows OS. Before running DGT, make sure [PowerShell](https://docs.microsoft.com/en-us/powershell/) has been installed. Right-click **OneKeyDeploy.ps1**, then click **Run with PowerShell**.
@@ -428,7 +443,7 @@ Users are allowed to reset tables in SQL Server.
 **Reset tables**
 
 ---
-
+-->
 # 5. Operation Manual
 
 ## 5.1 Dashboard
@@ -835,132 +850,22 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 
 ## 5.4 System
 
-### 5.4.1 Process Config
+### 5.4.1 Scan Status
 
 #### Usage
 
-- Add, delete, or edit the name of the process and its start assemblies.
+- Scan the targets to get data of analysis.
 
 #### Instruction
 
-##### Add new
+- Place the file to be scanned into the right folder.
 
-1. Click Add new.
-2. Enter a process name.
-3. Add Start Assemblies.
-4. Click OK.
+![scan status](image/System/Scan.png "Scan status")
 
-![ANO](image/AddNew.png "Add new operation")
+- Select the target folder and click SCAN to start the scanning. FORCE SCAN is a back up option for the case of scanning failure.
 
-**Add new operation**
+![scan Select](image/System/ScanSelect.png "Scan Select")
 
-##### Edit
+- Once the scanning accomplished, results will be displayed in the table. Results with status SUCCESS will provide analysis data to the tools.
 
-1. Click Edit.
-2. Edit the process name.
-3. Edit Start Assemblies.
-4. Click OK.
-
-![Edit](image/Edit.png "Edit operation")
-
-**Edit operation**
-
-##### Delete
-
-1. Click Delete.
-2. Click OK.
-
-![Delete](image/Delete.png "Delete operation")
-
-**Delete operation**
-
-### 5.4.2 Repo Config'
-
-#### Usage
-
-- Add, delete, or edit repo [settings](#3.3-UI-configuration).
-
-#### Instruction
-
-##### Edit
-
-1. Click Edit.
-2. Edit settings.
-3. Click OK.
-
-![RepoConfigEdit](image/RepoConfigEdit.png "Edit operation")
-
-**Edit operation**
-
-##### Delete
-
-Click Delete.
-Click OK.
-
-![RepoConfigDelete](image/RepoConfigDelete.png "Delete operation")
-
-**Delete operation**
-
-#### Set up
-
-The Set up button shows up when there is no repo.
-1. Click Set up.
-2. Enter settings.
-3. Click OK.
-
-![RepoConfigSetup](image/RepoConfigSetup.png "Set up operation") 
-
-**Set up operation**
-
-### 5.4.3 Import Status
-
-#### Usage
-
-- Add, delete, or edit repo import status
-
-#### Instruction
-
-##### Add new
-
-1. Click Add new.
-2. Enter settings.
-3. Click OK.
-
-![ImportStatusAdd](image/ImportStatusAdd.png "Add new operation")
-
-**Add new operation**
-
-##### Edit
-
-1. Click Edit.
-2. Edit settings.
-3. Click OK.
-
-![ImportStatusEdit](image/ImportStatusEdit.png "Edit operation")
-
-**Edit operation**
-
-##### Delete
-
-1. Click Delete.
-2. Click OK.
-
-![ImportStatusDelete](image/ImportStatusDelete.png "Delete operation")
-
-**Delete operation**
-
-### 5.4.4 Error Log
-
-#### Usage
-
-- Search the cause and impact of data import failure. 
-- Help check out if scanning or rule import is activated.
-
-#### Instruction
-
-1. Select a Version.
-2. Get results.
-
-![error log](image/ErrorLog.png "Error log")
-
-**Error log**
+![scan result](image/System/ScanResult.png "Scan result")
