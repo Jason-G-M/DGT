@@ -972,7 +972,7 @@ The Set up button shows up when there is no repo.
 
 #### Instruction
 
-1. Click ADD NEW to add a new config.
+- Click ADD NEW to add a new config.
 
 ![process config](image/System/ProcessConfig.png "process config")
 
@@ -980,7 +980,7 @@ The Set up button shows up when there is no repo.
 
 **Input process name and starting assemblies in the dialogue, click OK to submit.**
 
-2. Click EDIT or DELETE to update or remove an existing config.
+- Click EDIT or DELETE to update or remove an existing config.
 
 ![process config edit](image/System/ProcessConfigEdit.png "process config edit")
 
@@ -992,14 +992,14 @@ The Set up button shows up when there is no repo.
 
 #### Instruction
 
-1. Place the file to be scanned into the right folder.
+- Place the file to be scanned into the right folder.
 
 ![scan status](image/System/Scan.png "Scan status")
 
-2. Select the target folder and click SCAN to start the scanning. FORCE SCAN is a back up option for the case of scanning failure.
+- Select the target folder and click SCAN to start the scanning. FORCE SCAN is a back up option for the case of scanning failure.
 
 ![scan Select](image/System/ScanSelect.png "Scan Select")
 
-3. Once the scanning accomplished, results will be displayed in the table. Results with status SUCCESS will provide analysis data to the tools.
+- Once the scanning accomplished, results will be displayed in the table. Results with status SUCCESS will provide analysis data to the tools.
 
 ![scan result](image/System/ScanResult.png "Scan result")
