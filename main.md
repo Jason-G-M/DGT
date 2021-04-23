@@ -834,7 +834,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 **Multi-Path Assembly To Type Overview**
 
 ## 5.4 System
-
+<!--
 ### 5.4.1 Process Config
 
 #### Usage
@@ -964,3 +964,42 @@ The Set up button shows up when there is no repo.
 ![error log](image/ErrorLog.png "Error log")
 
 **Error log**
+-->
+### 5.4.1 Process Config
+#### Usage
+
+- Config the name of processes and starting assemblies before scanning.
+
+#### Instruction
+
+1. Click ADD NEW to add a new config.
+
+![process config](image/system/ProcessConfig.png "process config")
+
+![dialogue](image/system/ProcessConfigPopUp.png "dialogue")
+
+**Input process name and starting assemblies in the dialogue, click OK to submit.**
+
+2. Click EDIT or DELETE to update or remove an existing config.
+
+![process config edit](image/system/ProcessConfigEdit.png "process config edit")
+
+### 5.4.2 Scan Status
+
+#### Usage
+
+- Scan the targets to get data of analysis.
+
+#### Instruction
+
+1. Place the file to be scanned into the right folder.
+
+![scan status](image/system/Scan.png "Scan status")
+
+2. Select the target folder and click SCAN to start the scanning. FORCE SCAN is a back up option for the case of scanning failure.
+
+![scan Select](image/system/ScanSelect.png "Scan Select")
+
+3. Once the scanning accomplished, results will be displayed in the table. Results with status SUCCESS will provide analysis data to the tools.
+
+![scan result](image/system/ScanResult.png "Scan result")
