@@ -24,7 +24,7 @@ DGT service consists of four processes and is supported by two databases.
 - Front End
   - Present data.
 
-  ![DataFlow](image/flow.png "Data flow")
+  ![DataFlow](../image/flow.png "Data flow")
   
   **Data flow**
 
@@ -35,7 +35,7 @@ DGT service consists of four processes and is supported by two databases.
 - Neo4j
   - Store graph data
 
-![arch](image/arch.png "Database schema")
+![arch](../image/arch.png "Database schema")
 
 **The database schema**
 
@@ -90,7 +90,7 @@ bin\neo4j console
 #### Neo4j Host
 
 Neo4j Host can be found after logging in, for example, the Neo4j Host in the figure below is bolt://127.0.0.1:7687.
-![Neo4j dashboard and Neo4j Host](image/Neo4jDashboardAndHost.png "Neo4j dashboard and Neo4j Host")
+![Neo4j dashboard and Neo4j Host](../image/Neo4jDashboardAndHost.png "Neo4j dashboard and Neo4j Host")
 
 ## 2.2 SQL Server
 
@@ -117,26 +117,26 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
   - New Login: Right-click **Security** -> **New** -> **Login** -> Enter Login name -> Choose **SQL Server authentication** -> Set password -> Click **OK**.
   - Log in with your username and password: Connect -> set **Authentication** to **SQL Server Authentication** type -> enter **Login** and **Password** -> **Connect**.
 
-![CreateLogin](image/CreateLogin.png "Create login")
+![CreateLogin](../image/CreateLogin.png "Create login")
 
 **Create login**
 
-![SetUserIdAndPassword](image/SetUserIdAndPassword.png "Set user ID and password")
+![SetUserIdAndPassword](../image/SetUserIdAndPassword.png "Set user ID and password")
 
 **Set User ID and Password**
 
-![UserIdAndPassword](image/UserIdAndPassword.png "User ID and password")
+![UserIdAndPassword](../image/UserIdAndPassword.png "User ID and password")
 
 **User ID and password**
 
 - [Name of your database](https://docs.microsoft.com/en-us/sql/relational-databases/tables/create-tables-database-engine?view=sql-server-ver15): Create a new database and record the name of it.
   - Right-click **Database** -> Click **New Database** -> Enter Database name -> Click **OK**. Or use your previous one. Check the name of the database. 
 
-![CreateANewDatabase](image/CreateANewDatabase.png "Create a new database")
+![CreateANewDatabase](../image/CreateANewDatabase.png "Create a new database")
 
 **Create a new database**
 
-![SetNameOFTheDatabaseAndClickOk](image/SetNameOfTheDatabaseAndClickOk.png "Set name of the database and click OK")
+![SetNameOFTheDatabaseAndClickOk](../image/SetNameOfTheDatabaseAndClickOk.png "Set name of the database and click OK")
 
 **Set name of the database and click OK**
 
@@ -147,7 +147,7 @@ Neo4j Host can be found after logging in, for example, the Neo4j Host in the fig
   - Open the server -> Security -> Login -> Right-click **sa** account -> Choose propertites -> Set new password -> Click Status in the left of the window -> Set Login **Enable** -> Click **OK**.
   - Open the server -> Connect Server with **sa** account and your **sa**'s password -> **Security** -> **Login** -> Right-click your **personal** account -> Choose **propertites** -> Choose **User Mapping** in the left of the window -> Add your database to your Login -> add **db_owner** -> Click **OK**.
 
-![add DB](image/AddDb.png "Add db_owner to your database")
+![add DB](../image/AddDb.png "Add db_owner to your database")
 
 **Add db_owner to your database**
 
@@ -198,7 +198,7 @@ Before running the script OneKeyDeploy.ps1, it is necessary to define file paths
 
 The following paragraph is based on the default config folder, ConfigFolder, containing ApiPort, AssemblyFolder, CacheFolder, and version.txt. The content in the ConfigFolder will be used in a [demo](#4.1-Assembly-package-demo) described in the next chapter. **The configuration of the demo is used as the default configuration**.
 
-![Default Config Folder](image/DefaultConfigFolder.png "Default config folder")
+![Default Config Folder](../image/DefaultConfigFolder.png "Default config folder")
 
 **Default Config Folder**
 
@@ -206,7 +206,7 @@ The following paragraph is based on the default config folder, ConfigFolder, con
 
 The physical path of the folder containing assembly files to be scanned. Under the assembly folder, files to be scanned are stored in the corresponding sub-folders in the assembly folder. For example, If the [assembly file version](https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning) of the repo is 1.0.0.0, it is required to create a folder in the assembly folder, naming it as 1.0.0.0. Then put files to be scanned in the Folder 1.0.0.0.
 
-![Assembly Folder](image/AssemblyFolder.png "Assembly folder")
+![Assembly Folder](../image/AssemblyFolder.png "Assembly folder")
 
 **Assembly Folder**
 
@@ -214,7 +214,7 @@ The physical path of the folder containing assembly files to be scanned. Under t
 
 The location of the version.txt file that stores an assembly file version, for example, 1.0.0.0. If 1.0.0.0 is set in version.txt, the DGT will scan files in the folder with the path AssemblyFolder/1.0.0.0.
 
-![version.txt and its content](image/Version.txtAndItsContent.png "version.txt and its content")
+![version.txt and its content](../image/Version.txtAndItsContent.png "version.txt and its content")
 
 **version.txt and its content**
 
@@ -222,7 +222,7 @@ The location of the version.txt file that stores an assembly file version, for e
 
 Scanned results will be stored under this path.
 
-![Cache Folder](image/CacheFolder.png "Cache folder")
+![Cache Folder](../image/CacheFolder.png "Cache folder")
 
 **Cache Folder**
 
@@ -230,7 +230,7 @@ Scanned results will be stored under this path.
 
 The physical path of ApiPort.exe or ApiPort.dll. The ApiPort can determine the compatibility of an API.
 
-![ApiPort.exe](image/ApiPort.exe.png "ApiPort.exe")
+![ApiPort.exe](../image/ApiPort.exe.png "ApiPort.exe")
 
 **ApiPort.exe**
 
@@ -257,7 +257,7 @@ Users are allowed to customize the configuration by following the steps below.
 - http://localhost:8000 to 8003 are used to set the default listening ports.
 - Users are allowed to customize listening ports in the script.
 
-![Customized listening ports](image/CustomizedListeningPorts.png "Customized Listening Ports")
+![Customized listening ports](../image/CustomizedListeningPorts.png "Customized Listening Ports")
 
 **Customized Listening Ports**
 
@@ -265,7 +265,7 @@ Users are allowed to customize the configuration by following the steps below.
 
 Enter the Neo4j and SQL Server configuration in the script (using parameters from [2.1.2](#2.1.2-Neo4j-configuration) and [2.2.2](#2.2.2-SQL-Server-configuration)).
 
-![Configure With Neo4j And Sql Server](image/ConfigureWithNeo4jAndSqlServer.png "Configure with Neo4j and Sql Server")
+![Configure With Neo4j And Sql Server](../image/ConfigureWithNeo4jAndSqlServer.png "Configure with Neo4j and Sql Server")
 
 **Configure with Neo4j and Sql Server**
 
@@ -273,7 +273,7 @@ Enter the Neo4j and SQL Server configuration in the script (using parameters fro
 
 Name of the repo, the default name is **DefaultRepo**, open to be modified when running the script.
 
-![Repo Name](image/RepoName.png "Repo name")
+![Repo Name](../image/RepoName.png "Repo name")
 
 ## 3.3 UI configuration
 
@@ -291,7 +291,7 @@ Name of the repo, the default name is **DefaultRepo**, open to be modified when 
   - **.Net Core Exts** and **.Net Standard Exts** determine whether an API is compatible or incompatible. The rule is: an API is supported if one of its versions is either below .NET Core Exts or .NET Standard Exts, otherwise, the API is not supported. Configuring with a version number **0** is going to disable the check. 
   - **Compatible** means an API can work in a new environment. When setting configurations, you are allowed to set **X2** and **Y2** shown in the figure below.
 
-![The Condition Of Api Is Compatible In A New Environment](image/TheConditionOfApiIsCompatibleInANewEnvironment.png "The condition of Api is compatible in a new environment")
+![The Condition Of Api Is Compatible In A New Environment](../image/TheConditionOfApiIsCompatibleInANewEnvironment.png "The condition of Api is compatible in a new environment")
 
 **The condition of Api is compatible in a new environment**
 
@@ -304,7 +304,7 @@ Name of the repo, the default name is **DefaultRepo**, open to be modified when 
 #### Default Configuration
 
 Users are allowed to modify the default configuration.
-![Default Configuration](image/DefaultConfiguration.png "Default Configuration")
+![Default Configuration](../image/DefaultConfiguration.png "Default Configuration")
 
 **Default Configuration**
 
@@ -337,15 +337,15 @@ Config the name of processes and starting assemblies before scanning.
 
 - Click ADD NEW to add a new config.
 
-![process config](image/System/ProcessConfig.png "process config")
+![process config](../image/System/ProcessConfig.png "process config")
 
 - Input process name and starting assemblies in the dialogue, click OK to submit.
 
-![dialogue](image/System/ProcessConfigPopUp.png "dialogue")
+![dialogue](../image/System/ProcessConfigPopUp.png "dialogue")
 
 - Click EDIT or DELETE to update or remove an existing config.
 
-![process config edit](image/System/ProcessConfigEdit.png "process config edit")
+![process config edit](../image/System/ProcessConfigEdit.png "process config edit")
 
 <!--
 # 4. Deployment
@@ -356,14 +356,14 @@ Config the name of processes and starting assemblies before scanning.
 
 The assembly package demo consists of two folders, either folder corresponds to version 1.0.0.0 and 1.0.0.1 respectively, they are prepared for DGT to scan, analyze and generate the graph. The structures of the files in both folders are shown below.
 
-![Folder 1.0.0.0](image/Folder1.0.0.0.png "Folder 1.0.0.0")
+![Folder 1.0.0.0](../image/Folder1.0.0.0.png "Folder 1.0.0.0")
 
 **Folder 1.0.0.0**
 
 Folder 1.0.0.0 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grandson.dll**, **Nuget.Common.dll** and **SimpleInjector.dll**. Root.dll file is the start assembly file.
 ## Start with a script
 
-![Folder 1.0.0.1](image/Folder1.0.0.1.png "Folder 1.0.0.1")
+![Folder 1.0.0.1](../image/Folder1.0.0.1.png "Folder 1.0.0.1")
 
 **Folder 1.0.0.1**
 
@@ -377,7 +377,7 @@ Folder 1.0.0.1 consists of **Root.dll**, **Son.dll**, **Daughter.dll**, **Grands
 - In most cases, all the assembly file versions of a repo are the same, which can help to differentiate whether the current repo is NuGet or not.
 - Generally, the assembly file version is the same as the [build version](https://searchsoftwarequality.techtarget.com/definition/build). Get [more information](https://docs.microsoft.com/en-us/dotnet/standard/assembly/set-attributes) here if user demands to change the assembly file version.
 
-![Root.dll](image/Root.dll.png "Root.dll")
+![Root.dll](../image/Root.dll.png "Root.dll")
 
 **The assembly file version is the same as the build version (product version).**
 <!--
@@ -399,7 +399,7 @@ Do you want to have a quick start with a demo (pre-prepared asembly files will b
 - Start four processes.
 - Monitor four processes.
 
-![Start and monitor 4 processes](image/StartAndMonitor4Processes.png "Start and monitor 4 processes")
+![Start and monitor 4 processes](../image/StartAndMonitor4Processes.png "Start and monitor 4 processes")
 
 **Start and monitor 4 processes**
 
@@ -407,7 +407,7 @@ Do you want to have a quick start with a demo (pre-prepared asembly files will b
 
 The decision tree indicates the main decisions made in the script and the corresponding results.
 
-![Decision Tree](image/DecisionTree.png "Decision Tree of the script")
+![Decision Tree](../image/DecisionTree.png "Decision Tree of the script")
 
 **Decision Tree of the script**
 
@@ -438,7 +438,7 @@ Use default settings and demo to have a quick start.
 
 Users are allowed to reset tables in SQL Server.
  
-![Reset tables](image/ResetTables.png "Reset tables")
+![Reset tables](../image/ResetTables.png "Reset tables")
 
 **Reset tables**
 
@@ -458,20 +458,20 @@ The dashboard contains four charts.
 - [Overlaps per build](#Overlaps-per-build), showing the impact on other processes.
 - [All processes per build](#All-processes-per-build), showing the overall situation for all onboard processes.
 
-![dashboard overview](image/DashboardOverview.png "Dashboard overview")
+![dashboard overview](../image/DashboardOverview.png "Dashboard overview")
 
 **Dashboard overview**
 
 #### Pie charts of version's status
 
-![Proportion](image/Proportion.png "Proportion of compatibles and incompatibles")
+![Proportion](../image/Proportion.png "Proportion of compatibles and incompatibles")
 
 **Proportion of compatibles and incompatibles**
 
 - Total: Sum of the compatible and incompatible APIs from DefaultRepo and Nuget. For example, in the figure above, the number of compatible APIs in Total, 14, comes from 4 compatible APIs in DefaultRepo and 10 Compatible APIs from Nuget; and the number of Incompatible APIs in Total, 0, comes from 0 Incompatible APIs in - DefaultRepo and 0 Incompatible APIs from Nuget.
 DefaultRepo: The content of the DefaultRepo pie chart comes from your repo (or your project). For example, in Demo 1.0.0.0 shown below, Root.dll, Son.dll, Daughter.dll, and GrandSon.dll are created by yourself (you define them) in your repo (or project), so the DefaultRepo pie chart is made up by these four files (nodes). Since APIs of them are all compatible, the pie chart shows that Compatible is 4 and Incompatible is 0.
 
-![Demo 1.0.0.0](image/Demo1.0.0.0.png "Demo 1.0.0.0")
+![Demo 1.0.0.0](../image/Demo1.0.0.0.png "Demo 1.0.0.0")
 
 **Demo 1.0.0.0**
 
@@ -480,19 +480,19 @@ DefaultRepo: The content of the DefaultRepo pie chart comes from your repo (or y
 
 #### Trend over builds
 
-![TrendOverBuilds](image/TrendOverBuilds.png "Trend over builds")
+![TrendOverBuilds](../image/TrendOverBuilds.png "Trend over builds")
 
 **Number of compatibles and incompatibles of each build**
 
 #### Overlaps per build
 
-![Overlaps Per Build](image/OverlapsPerBuild.png "Overlaps per build")
+![Overlaps Per Build](../image/OverlapsPerBuild.png "Overlaps per build")
 
 ** Overlaps and differences between current build and others**
 
 #### All processes per build
 
-![All processes](image/AllProcessesPerBuild.png "All processes")
+![All processes](../image/AllProcessesPerBuild.png "All processes")
 
 **Number of compatibles and incompatibles of each process in the current build.**
 
@@ -501,7 +501,7 @@ DefaultRepo: The content of the DefaultRepo pie chart comes from your repo (or y
 - The results shown on this page are from Demo 1.0.0.0.
 - Make sure you match the version and process name. The version is the file version of your repo, and the process name can be found in the Process Config page.  
 
-![version and process](image/VersionAndProcess.png "Version and process")
+![version and process](../image/VersionAndProcess.png "Version and process")
 
 **Version and process**
 
@@ -519,7 +519,7 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 2. View results. 
 3. Get Results.
 
-![overview](image/Process'sRootParentOverview.png "Overview")
+![overview](../image/Process'sRootParentOverview.png "Overview")
 
 **Process's Root Parent Overview**
 
@@ -539,7 +539,7 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 4. Click on the X button in the skips list to remove the assembly from the list (optional). 
 5. Get Results.
 
-![Process to assembly](image/ProcessToAssembly.png "Process to assembly")
+![Process to assembly](../image/ProcessToAssembly.png "Process to assembly")
 
 **Multiple paths start from process to target assembly Overview**
 
@@ -559,7 +559,7 @@ View the name of assemblies directly referred by a process.#### 5.2.2 Process to
 4. Click on the X button in the skips list to remove the assembly from the list (optional). 
 5. Get Results.
 
-![Assembly to assembly](image/Assembly2AssemblyOverview.png "Assembly to assembly")
+![Assembly to assembly](../image/Assembly2AssemblyOverview.png "Assembly to assembly")
 
 **Assembly to assembly overview**
 
@@ -579,7 +579,7 @@ Click on the assembly in results to view its details (optional).
 Click on Export Total to export the results as excel (optional). 
 Get Results.
 
-![Process'sAsssembliesOverview](image/Process'sAsssembliesOverview.png "Process's assemblies overview")
+![Process'sAsssembliesOverview](../image/Process'sAsssembliesOverview.png "Process's assemblies overview")
 
 **Process's asssemblies overview**
 
@@ -601,7 +601,7 @@ See details of an assembly
 2. Select the process to filter data. 
 3. Get Results.
 
-![Assembly details overview](image/AssemblyDetailsOverview.png "Assembly details overview")
+![Assembly details overview](../image/AssemblyDetailsOverview.png "Assembly details overview")
 
 **Assembly details overview**
 
@@ -614,13 +614,13 @@ See details of an assembly
 5. Input package information.
 6. Get Results.
 
-![SetCompatibilityOfAssemblies](image/SetCompatibilityOfAssemblies.png "Set the compatibility of assemblies in Package pie chart")
+![SetCompatibilityOfAssemblies](../image/SetCompatibilityOfAssemblies.png "Set the compatibility of assemblies in Package pie chart")
 
 **Set the compatibility of assemblies in Package pie chart**
 
 If you set the compatibility successfully, the Create button will be changed to Update and you will see the figure below.
 
-![SetCompatibilitySuccessfully](image/SetCompatibilitySuccessfully.png "Set compatibility successfully")
+![SetCompatibilitySuccessfully](../image/SetCompatibilitySuccessfully.png "Set compatibility successfully")
 
 **Set compatibility successfully**
 
@@ -639,11 +639,11 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Click on the number of differences to view details. 
 - Get Results.
 
-![DifferenceDetails](image/DifferenceDetails.png "Difference overview")
+![DifferenceDetails](../image/DifferenceDetails.png "Difference overview")
 
 **Difference overview**
 
-![GoIntoDetails](image/GoIntoDetails.png "Go into details")
+![GoIntoDetails](../image/GoIntoDetails.png "Go into details")
 
 **Go into details**
 
@@ -662,11 +662,11 @@ If you set the compatibility successfully, the Create button will be changed to 
 - "Safe" means changing or adding an assembly will not affect the original process.
 - Get Results.
 
-![Operations](image/Operations.png "Operations")
+![Operations](../image/Operations.png "Operations")
 
 **Operations**
 
-![ViewResults](image/ViewResults.png "View results")
+![ViewResults](../image/ViewResults.png "View results")
 
 **View results**
 
@@ -684,7 +684,7 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Choose Path number or All paths checkbox, this will affect the number of results to display.
 - Get Results.
 
-![AssemblyChildrenPathsOverview](image/AssemblyChildrenPathsOverview.png "Assembly Children Paths Overview")
+![AssemblyChildrenPathsOverview](../image/AssemblyChildrenPathsOverview.png "Assembly Children Paths Overview")
 
 **Assembly Children Paths Overview**
 
@@ -701,47 +701,47 @@ If you set the compatibility successfully, the Create button will be changed to 
 - Input types that to be put together in same assembly, if any.
 - Click on "Generate Split Solution" button and get result.
 
-![SearchInstruction](image/AssemblySplitter/SearchInstruction.png "Instruction")
+![SearchInstruction](../image/AssemblySplitter/SearchInstruction.png "Instruction")
 
 **Instruction of searching**
 
-![ResultFirstTab](image/AssemblySplitter/Result_FirstTab.png "First tab of the result")
+![ResultFirstTab](../image/AssemblySplitter/Result_FirstTab.png "First tab of the result")
 
 **The result paged in 3 tabs, the first one shows the incoming and outgoing references to the target assembly before splitting**
 
-![ResultSecondTab](image/AssemblySplitter/Result_SecondTab.png "Second tab of the result")
+![ResultSecondTab](../image/AssemblySplitter/Result_SecondTab.png "Second tab of the result")
 
 **The second tab shows a possible solution of splitting**
 
-![ResultSecondTabDetail](image/AssemblySplitter/Result_SecondTab_Detail.png "Details of the second tab")
+![ResultSecondTabDetail](../image/AssemblySplitter/Result_SecondTab_Detail.png "Details of the second tab")
 
 **Expand one of the child assemblies to see the types included, internal and outgoing references**
 
-![ResultThirdTab](image/AssemblySplitter/Result_ThirdTab.png "Third tab of the result")
+![ResultThirdTab](../image/AssemblySplitter/Result_ThirdTab.png "Third tab of the result")
 
 **The third tab lists all the incoming references**
 
-![ResultThirdTabDetail](image/AssemblySplitter/Result_ThirdTab_Detail.png "Details of the third tab")
+![ResultThirdTabDetail](../image/AssemblySplitter/Result_ThirdTab_Detail.png "Details of the third tab")
 
 **Expand one of the references to see the child assemblies called and the outgoing references**
 
 On applying Equal Inward Assemblies:
 
-![EqualInwardFormat](image/AssemblySplitter/EqualInwardFormat.png "Format of Equal Inward Assemblies")
+![EqualInwardFormat](../image/AssemblySplitter/EqualInwardFormat.png "Format of Equal Inward Assemblies")
 
 **Input format of Equal Inward Assemblies**
 
-![EqualInwardResult](image/AssemblySplitter/EqualInwardResult.png "Incoming references share the same dependency")
+![EqualInwardResult](../image/AssemblySplitter/EqualInwardResult.png "Incoming references share the same dependency")
 
 **The solution will try making selected incoming references share the same dependency**
 
 On applying Type Closures:
 
-![TypeClosureFormat](image/AssemblySplitter/TypeClosureFormat.png "Format of Type Closures, same with Equal Inward Assemblies")
+![TypeClosureFormat](../image/AssemblySplitter/TypeClosureFormat.png "Format of Type Closures, same with Equal Inward Assemblies")
  
 **Input format of Type Closures, same with that of Equal Inward Assemblies** 
 
-![TypeClosureResult](image/AssemblySplitter/TypeClosureResult.png "The solution arrange types in same brackets into same child assembly")
+![TypeClosureResult](../image/AssemblySplitter/TypeClosureResult.png "The solution arrange types in same brackets into same child assembly")
 
 **The solution will arrange types in same brackets into same child assemblies"**
 
@@ -749,14 +749,14 @@ On applying Type Closures:
 
 This is a brief introduction of how the target assembly is splitted. Assuming we are going to split the assembly X, which is referenced by Y and Z.
 
-![Machenism1](image/AssemblySplitter/SplitRule1.png "Before splitting")
+![Machenism1](../image/AssemblySplitter/SplitRule1.png "Before splitting")
 
 **Y and Z are assemblies depending our target assembly X, a,b,c,d and e are types of X**
 
 On splitting, types of the target assembly directly depended by parent assemblies are "colored" respectively (a and b), then the coloring spreads through the reference of each colored type. Types with multiple up-level types in different colors will be given a new color (d is given a new color).
 When the coloring is done, types are separated into groups according to their colors (a and b are seprated into different assemblies, d and e in same assembly). Types that had never been colored are separated into "Untouchable part" group (c in Untouchable part).
 
-![Machenism2](image/AssemblySplitter/SplitRule2.png "On splitting")
+![Machenism2](../image/AssemblySplitter/SplitRule2.png "On splitting")
 
 **The splitting machenism**
 
@@ -779,7 +779,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 3. Add filter according to a specific condition (optional). 
 4. Get Results.
 
-![Process's Types Overview](image/Process'sTypesOverview.png "Process's types overview")
+![Process's Types Overview](../image/Process'sTypesOverview.png "Process's types overview")
 
 **Process's types overview**
 
@@ -794,7 +794,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 1. Select Version, Source Process, and Target Type.
 2. Get Results.
 
-![One Shortest Path Process To Type Overview](image/ShortestPathP2T.png "One Shortest Path Process To Type Overview")
+![One Shortest Path Process To Type Overview](../image/ShortestPathP2T.png "One Shortest Path Process To Type Overview")
 
 **One Shortest Path Process To Type Overview**
 
@@ -809,7 +809,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 1. Select Version, Start Assembly, and Target Type.
 2. Get Results.
 
-![ShortestPathA2T](image/ShortestPathA2T.png "One Shortest Path From Assembly To Type Overview")
+![ShortestPathA2T](../image/ShortestPathA2T.png "One Shortest Path From Assembly To Type Overview")
 
 **One Shortest Path From Assembly To Type Overview**
 
@@ -827,7 +827,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 - Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional), or check "All paths" to see all the results.
 - Get Results.
 
-![PTO](image/PTO.png "Process's type overview")
+![PTO](../image/PTO.png "Process's type overview")
 
 **Process's Type Overview**
 
@@ -844,7 +844,7 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 3. Uncheck "All paths" and fill "path number" with a specific number to customize the number of results to display (up to 500, optional). Or check "All paths" to see all the results.
 4. Get Results.
 
-![MultiPathA2T](image/MultiPathA2T.png "Multi-path assembly to type overview")
+![MultiPathA2T](../image/MultiPathA2T.png "Multi-path assembly to type overview")
 
 **Multi-Path Assembly To Type Overview**
 
@@ -860,12 +860,12 @@ In condition of "Type Closures" is applied, bundled types will be colored same i
 
 - Place the file to be scanned into the right folder.
 
-![scan status](image/System/Scan.png "Scan status")
+![scan status](../image/System/Scan.png "Scan status")
 
 - Select the target folder and click SCAN to start the scanning. FORCE SCAN is a back up option for the case of scanning failure.
 
-![scan Select](image/System/ScanSelect.png "Scan Select")
+![scan Select](../image/System/ScanSelect.png "Scan Select")
 
 - Once the scanning accomplished, results will be displayed in the table. Results with status SUCCESS will provide analysis data to the tools.
 
-![scan result](image/System/ScanResult.png "Scan result")
+![scan result](../image/System/ScanResult.png "Scan result")
